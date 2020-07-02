@@ -20,7 +20,7 @@ object LibriVox : TingShu() {
     }
 
     override fun getName(): String {
-        return "LibriVox"
+        return "LibriVox 测试"
     }
 
     override fun getDesc(): String {

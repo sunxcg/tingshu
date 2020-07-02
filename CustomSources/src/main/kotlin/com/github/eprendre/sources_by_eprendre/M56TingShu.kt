@@ -18,7 +18,7 @@ object M56TingShu : TingShu() {
     }
 
     override fun getName(): String {
-        return "56听书网"
+        return "56听书网 测试"
     }
 
     override fun getDesc(): String {

@@ -18,7 +18,8 @@ object SourceEntry {
     @JvmStatic
     fun getSources(): List<TingShu> {
         return listOf(
-            JDLG
+            JDLG,
+            YouTuYueDu
         )
     }
 }
