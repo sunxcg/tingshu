@@ -12,7 +12,6 @@ import java.net.URLEncoder
  * 有兔阅读测试
  */
 class YouTuYueDuTest {
-    val userAgent = "Mozilla/5.0 (Android 4.4; Mobile; rv:46.0) Gecko/46.0 Firefox/46.0"
     val headers = mapOf(
     "devicetype" to "3",
     "channelname" to "official",
