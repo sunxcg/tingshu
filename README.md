@@ -9,7 +9,7 @@
 
 ## 自定义源
 
-请参考 `CustomSources` 项目，用 IDEA 打开即可。app 里面已经集成了网络请求库`Fuel` 以及HTML解析器 `Jsoup`， 此自定义源项目最好直接使用这两个库，不要引入额外的第三方库。
+请参考 `CustomSources` 项目，这是一个纯 java/kotlin 项目，用 IDEA 打开即可，不需要 Android Studio 以及安卓环境。app 里面已经集成了网络请求库`Fuel` 以及HTML解析器 `Jsoup`， 此自定义源项目最好直接使用这两个库，不要引入额外的第三方库。
 
 ### 第一步：重构目录名
 
@@ -45,8 +45,12 @@ IDEA 的 gradle 自带了打包任务，双击即可。输出路径为：项目�
 1. 手动添加：把 jar 包移至手机 app 目录下: `/sdcard/Android/data/com.github.eprendre.tingshu(.debug)/files/jars/`， app 会在启动时自动加载。
 
 2. 订阅添加。写一个接口，然后在 app 的自定义源管理右上角添加。 接口参考：[https://eprendre2.coding.net/p/tingshu/d/tingshu/git/raw/master/TingShuSources/external_sources.json](https://eprendre2.coding.net/p/tingshu/d/tingshu/git/raw/master/TingShuSources/external_sources.json)。订阅方式的好处是源作者可以更轻松的维护源，只要在接口里修改版本号，app 每次启动时会自动检测更新。
-`version` 为数字类型，代表版本号。 app 以此来判断这个 jar 包是否有更新。
-`entry_package` 为第一步提到的目录名，app下载 jar 包后也会自动命名为此名字。
-`download_url` jar 包下载地址。
+
+字段说明：
+
+* `version` 为数字类型，代表版本号。 app 以此来判断这个 jar 包是否有更新。
+* `entry_package` 为第一步提到的目录名，app下载 jar 包后也会自动命名为此名字。这是 app 找到相关类的关键。
+* `download_url` jar 包下载地址。
+* `update_msg` 更新信息。
 
 接口或者 jar 包都可以在 coding 或者 github 免费托管，国内用户推荐 coding 。
