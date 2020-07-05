@@ -1,5 +1,6 @@
 package com.github.eprendre.sources_by_eprendre
 
+import com.github.eprendre.tingshu.extensions.getDesktopUA
 import com.github.eprendre.tingshu.extensions.splitQuery
 import com.github.eprendre.tingshu.sources.AudioUrlDirectExtractor
 import com.github.eprendre.tingshu.sources.AudioUrlExtractor
@@ -21,7 +22,7 @@ object YouTuYueDu : TingShu() {
         "origin" to "https://www.mituyuedu.com",
         "Referer" to "https://www.mituyuedu.com",
         "seq" to "11111111111111111111111111111111",
-        "User-Agent" to "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
+        "User-Agent" to getDesktopUA(),
         "version" to "1.9.0"
     )
 
@@ -38,7 +39,7 @@ object YouTuYueDu : TingShu() {
     }
 
     override fun getDesc(): String {
-        return "有兔阅读 - 文学魅力 不止于此"
+        return "加载较慢，请耐心等待。"
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
@@ -118,7 +119,7 @@ object YouTuYueDu : TingShu() {
             val title = item.getString("name")
             val author = ""
             val artist = item.getString("actorName")
-            val status = "共 ${item.getInt("chapterCnt")}章"
+            val status = "共 ${item.getInt("chapterCnt")} 章"
             val intro = item.getString("intro")
             list.add(
                 Book(coverUrl, bookUrl, title, author, artist ).apply {
@@ -151,7 +152,7 @@ object YouTuYueDu : TingShu() {
             val title = item.getString("name")
             val author = ""
             val artist = item.getString("actorName")
-            val status = "共 ${item.getInt("chapterCnt")}章"
+            val status = "共 ${item.getInt("chapterCnt")} 章"
             val intro = item.getString("intro")
             list.add(
                 Book(coverUrl, bookUrl, title, author, artist).apply {

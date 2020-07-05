@@ -22,3 +22,26 @@ fun splitQuery(url: URL): LinkedHashMap<String, String> {
 fun Connection.config(isDesktop: Boolean = false): Connection {
     throw RuntimeException("Stub!")
 }
+
+/**
+ * 获取 PC 版 UA
+ */
+fun getDesktopUA(): String {
+    throw RuntimeException("Stub!")
+}
+
+/**
+ * 获取手机版 UA
+ */
+fun getMobileUA(): String {
+    throw RuntimeException("Stub!")
+}
+
+/**
+ * 加载多页章节列表时用到这个
+ * 调用之后相关界面上会显示：正在加载章节列表: $pageInfo
+ * 如果 pageInfo 传空，代表加载完毕
+ */
+fun notifyLoadingEpisodes(pageInfo: String?) {
+    throw RuntimeException("Stub!")
+}
