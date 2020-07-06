@@ -84,7 +84,18 @@ object YouTuYueDu : TingShu() {
             (0 until data.length()).forEach {
                 val item = data.getJSONObject(it)
                 val name = item.getString("name")
-                val musicPath = JSONObject(item.getString("musicPath")).getJSONObject("m").getString("addr")
+                val musicPathObject = JSONObject(item.getString("musicPath"))
+                val musicPath = when {
+                    musicPathObject.has("h") -> {
+                        musicPathObject.getJSONObject("h").getString("addr")
+                    }
+                    musicPathObject.has("m") -> {
+                        musicPathObject.getJSONObject("m").getString("addr")
+                    }
+                    else -> {
+                        musicPathObject.getJSONObject("l").getString("addr")
+                    }
+                }
                 val url = "https://video1.jiuhew.com/klajdfiaoj/music_collect${musicPath}"
                 episodes.add(Episode(name, url))
             }
@@ -121,13 +132,11 @@ object YouTuYueDu : TingShu() {
             val artist = item.getString("actorName")
             val status = "共 ${item.getInt("chapterCnt")} 章"
             val intro = item.getString("intro")
-            list.add(
-                Book(coverUrl, bookUrl, title, author, artist ).apply {
-                    this.status = status
-                    this.intro = intro
-                    this.sourceId = getSourceId()
-                }
-            )
+            val book = Book(coverUrl, bookUrl, title, author, artist )
+            book.status = status
+            book.intro = intro
+            book.sourceId = getSourceId()
+            list.add(book)
         }
 
         return Category(list, currentPage, pageCount, url, nextUrl)
@@ -154,13 +163,11 @@ object YouTuYueDu : TingShu() {
             val artist = item.getString("actorName")
             val status = "共 ${item.getInt("chapterCnt")} 章"
             val intro = item.getString("intro")
-            list.add(
-                Book(coverUrl, bookUrl, title, author, artist).apply {
-                    this.status = status
-                    this.intro = intro
-                    this.sourceId = getSourceId()
-                }
-            )
+            val book = Book(coverUrl, bookUrl, title, author, artist)
+            book.status = status
+            book.intro = intro
+            book.sourceId = getSourceId()
+            list.add(book)
         }
 
         return Pair(list, pageCount)

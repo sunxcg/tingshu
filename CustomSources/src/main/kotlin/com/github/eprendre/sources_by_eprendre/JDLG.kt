@@ -60,9 +60,9 @@ object JDLG : TingShu() {
 
         val list = ArrayList<Book>()
         divs[type].select("ul > li > a").forEach {
-            list.add(Book("", it.absUrl("href"), it.text(), "", "").apply {
-                this.sourceId = getSourceId()
-            })
+            val book = Book("", it.absUrl("href"), it.text(), "", "")
+            book.sourceId = getSourceId()
+            list.add(book)
         }
         return Category(list, 1, 1, url, "")
     }

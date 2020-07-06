@@ -105,7 +105,7 @@ class YouTuYueDuTest {
      */
     @Test
     fun bookDetail() {
-        val bookUrl = "https://app1.youzibank.com/audio/chapter/listAll?audioId=21758"
+        val bookUrl = "https://app1.youzibank.com/audio/chapter/listAll?audioId=141"
         val jsonObject = Fuel.get(bookUrl)
             .header(headers)
             .responseJson()
@@ -116,7 +116,18 @@ class YouTuYueDuTest {
         (0 until data.length()).forEach {
             val item = data.getJSONObject(it)
             val name = item.getString("name")
-            val musicPath = JSONObject(item.getString("musicPath")).getJSONObject("m").getString("addr")
+            val musicPathObject = JSONObject(item.getString("musicPath"))
+            val musicPath = when {
+                musicPathObject.has("h") -> {
+                    musicPathObject.getJSONObject("h").getString("addr")
+                }
+                musicPathObject.has("m") -> {
+                    musicPathObject.getJSONObject("m").getString("addr")
+                }
+                else -> {
+                    musicPathObject.getJSONObject("l").getString("addr")
+                }
+            }
             val url = "https://video1.jiuhew.com/klajdfiaoj/music_collect${musicPath}"
             episodes.add(Episode(name, url))
         }
