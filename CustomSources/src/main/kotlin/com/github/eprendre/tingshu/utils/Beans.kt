@@ -1,13 +1,12 @@
 package com.github.eprendre.tingshu.utils
 
 data class Book(
-    val coverUrl: String,//封面链接
+    var coverUrl: String,//封面链接
     val bookUrl: String,//书籍链接
     val title: String,//标题
-    val author: String,//作者
-    val artist: String//演播
+    var author: String,//作者
+    var artist: String//演播
 ) {
-    var sourceId: String? = null//源id，代表这本书属于某个源
     var id: Int? = null
     var intro: String = ""
     var currentEpisodeUrl: String? = null
@@ -23,8 +22,20 @@ data class Book(
     var episodeList: List<Episode>? = null
     var hasFullEpisodes: Boolean = false//只有 source 的 isMultipleEpisodePages 为 true 时，这个属性才起作用。
     var isShowBriefChapterTitle: Boolean = false
+    var sourceId: String? = null
     var status: String = ""
 
+    override fun equals(other: Any?): Boolean {
+        throw RuntimeException("Stub!")
+    }
+
+    override fun hashCode(): Int {
+        throw RuntimeException("Stub!")
+    }
+
+    fun copyFrom(book: Book) {
+        throw RuntimeException("Stub!")
+    }
 }
 
 data class Episode(val title: String, val url: String) {
@@ -43,7 +54,7 @@ data class CategoryTab(
 ) : IMenu {
 
     override fun getType(): Int {
-        return 1
+        throw RuntimeException("Stub!")
     }
 }
 
@@ -66,24 +77,15 @@ data class CategoryMenu(
 ) : IMenu {
 
     override fun getType(): Int {
-        return 0
+        throw RuntimeException("Stub!")
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
-        if (other !is CategoryMenu) {
-            return false
-        }
-
-        return tabs == other.tabs
+        throw RuntimeException("Stub!")
     }
 
     override fun hashCode(): Int {
-        var result = title.hashCode()
-        result = 31 * result + tabs.hashCode()
-        return result
+        throw RuntimeException("Stub!")
     }
 }
 
