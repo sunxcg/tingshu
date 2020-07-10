@@ -2,6 +2,8 @@
 
 一款自用的安卓听书app
 
+视频教程：[https://www.bilibili.com/video/BV1jk4y1B75a](https://www.bilibili.com/video/BV1jk4y1B75a)
+
 ## 下载
 
 * [Release](https://github.com/eprendre/tingshu/releases)
