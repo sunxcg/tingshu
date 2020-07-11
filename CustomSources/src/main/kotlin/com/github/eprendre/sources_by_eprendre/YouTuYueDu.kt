@@ -7,10 +7,16 @@ import com.github.eprendre.tingshu.sources.AudioUrlExtractor
 import com.github.eprendre.tingshu.sources.TingShu
 import com.github.eprendre.tingshu.utils.*
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.json.responseJson
 import org.json.JSONObject
 import java.net.URL
 import java.net.URLEncoder
+import java.security.cert.X509Certificate
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 /**
  * 米兔阅读
@@ -25,6 +31,21 @@ object YouTuYueDu : TingShu() {
         "User-Agent" to getDesktopUA(),
         "version" to "1.9.0"
     )
+
+    private val manager : FuelManager = FuelManager().apply {
+        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+            override fun getAcceptedIssuers(): Array<X509Certificate>? = null
+            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) = Unit
+            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) = Unit
+        })
+
+        socketFactory = SSLContext.getInstance("SSL").apply {
+            init(null, trustAllCerts, java.security.SecureRandom())
+        }.socketFactory
+
+        hostnameVerifier = HostnameVerifier { _, _ -> true }
+    }
+
 
     override fun getSourceId(): String {
         return "41aa5aff6ee54089a09ef74a4adb3a77"
@@ -46,7 +67,7 @@ object YouTuYueDu : TingShu() {
         val list = ArrayList<CategoryMenu>()
 
         val url = "https://app1.youzibank.com/audio/book/cls/list"
-        val jsonObject = Fuel.get(url)
+        val jsonObject = manager.get(url)
             .header(headers)
             .responseJson()
             .third.get().obj()
@@ -76,7 +97,7 @@ object YouTuYueDu : TingShu() {
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = ArrayList<Episode>()
         if (loadEpisodes) {
-            val jsonObject = Fuel.get(bookUrl)
+            val jsonObject = manager.get(bookUrl)
                 .header(headers)
                 .responseJson()
                 .third.get().obj()
@@ -104,7 +125,7 @@ object YouTuYueDu : TingShu() {
     }
 
     override fun getCategoryList(url: String): Category {
-        val jsonObject = Fuel.get(url)
+        val jsonObject = manager.get(url)
             .header(headers)
             .responseJson()
             .third.get().obj()
@@ -145,7 +166,7 @@ object YouTuYueDu : TingShu() {
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
         val encodedKeywords = URLEncoder.encode(keywords, "utf-8")
         val url = "https://app1.youzibank.com/es/search/audio?q=${encodedKeywords}&pageSize=10&pageNo=${page}&page=${page}&size=10"
-        val jsonObject = Fuel.get(url)
+        val jsonObject = manager.get(url)
             .header(headers)
             .responseJson()
             .third.get().obj()

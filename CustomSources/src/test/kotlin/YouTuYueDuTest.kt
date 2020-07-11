@@ -2,17 +2,23 @@ import com.github.eprendre.tingshu.extensions.splitQuery
 import com.github.eprendre.tingshu.utils.Book
 import com.github.eprendre.tingshu.utils.Episode
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.json.responseJson
 import org.json.JSONObject
 import org.junit.Test
 import java.net.URL
 import java.net.URLEncoder
+import java.security.cert.X509Certificate
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 /**
  * 有兔阅读测试
  */
 class YouTuYueDuTest {
-    val headers = mapOf(
+    private val headers = mapOf(
     "devicetype" to "3",
     "channelname" to "official",
     "origin" to "https://www.mituyuedu.com",
@@ -21,6 +27,19 @@ class YouTuYueDuTest {
     "User-Agent" to "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
     "version" to "1.9.0"
     )
+    private val manager : FuelManager = FuelManager().apply {
+        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+            override fun getAcceptedIssuers(): Array<X509Certificate>? = null
+            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) = Unit
+            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) = Unit
+        })
+
+        socketFactory = SSLContext.getInstance("SSL").apply {
+            init(null, trustAllCerts, java.security.SecureRandom())
+        }.socketFactory
+
+        hostnameVerifier = HostnameVerifier { _, _ -> true }
+    }
 
     /**
      * 发现分类，如果没有则不用提供
@@ -28,7 +47,7 @@ class YouTuYueDuTest {
     @Test
     fun categories() {
         val url = "https://app1.youzibank.com/audio/book/cls/list"
-        val jsonObject = Fuel.get(url)
+        val jsonObject = manager.get(url)
             .header(headers)
             .responseJson()
             .third.get().obj()
@@ -62,7 +81,7 @@ class YouTuYueDuTest {
         val encodedKeywords = URLEncoder.encode(keywords, "utf-8") //编码
         val url = "https://app1.youzibank.com/es/search/audio?q=${encodedKeywords}&pageSize=10&pageNo=${page}&page=${page}&size=10"
 
-        val jsonObject = Fuel.get(url)
+        val jsonObject = manager.get(url)
             .header(headers)
             .responseJson()
             .third.get().obj()
@@ -106,7 +125,7 @@ class YouTuYueDuTest {
     @Test
     fun bookDetail() {
         val bookUrl = "https://app1.youzibank.com/audio/chapter/listAll?audioId=141"
-        val jsonObject = Fuel.get(bookUrl)
+        val jsonObject = manager.get(bookUrl)
             .header(headers)
             .responseJson()
             .third.get().obj()
@@ -146,7 +165,7 @@ class YouTuYueDuTest {
         val parentId = 38
         val subId = 39
         val url = "https://app1.youzibank.com/audio/list?fullFlag=2&orderBy=play_cnt&clsIdFirst=${parentId}&clsIdSecond=${subId}&pageNo=1&pageSize=10&page=1&size=10"
-        val jsonObject = Fuel.get(url)
+        val jsonObject = manager.get(url)
             .header(headers)
             .responseJson()
             .third.get().obj()
