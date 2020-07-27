@@ -96,3 +96,30 @@ abstract class TingShu {
 interface AudioUrlExtractor {
     fun extract(url: String, autoPlay: Boolean, isCache: Boolean)
 }
+
+/**
+ * 如果源需要展示广告就实现这个接口
+ * 1.7.3 开始加入
+ */
+interface IAd {
+    /**
+     * 广告页的网址，如果返回空，app 自动展示当前章节页面。
+     */
+    fun adUrl(): String = ""
+
+    /**
+     * 是否默认展示广告
+     */
+    fun showAdByDefault(): Boolean = false
+}
+
+/**
+ * 请求音频地址时是否需要额外的 header
+ * 1.7.3 开始加入
+ */
+interface AudioUrlExtraHeaders {
+    /**
+     * 返回音频地址需要添加的 headers
+     */
+    fun headers(audioUrl: String): Map<String, String>
+}

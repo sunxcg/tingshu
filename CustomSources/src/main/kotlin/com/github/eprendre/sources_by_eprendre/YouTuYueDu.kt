@@ -3,13 +3,14 @@ package com.github.eprendre.sources_by_eprendre
 import com.github.eprendre.tingshu.extensions.getDesktopUA
 import com.github.eprendre.tingshu.extensions.splitQuery
 import com.github.eprendre.tingshu.sources.AudioUrlDirectExtractor
+import com.github.eprendre.tingshu.sources.AudioUrlExtraHeaders
 import com.github.eprendre.tingshu.sources.AudioUrlExtractor
 import com.github.eprendre.tingshu.sources.TingShu
 import com.github.eprendre.tingshu.utils.*
-import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.json.responseJson
 import org.json.JSONObject
+import java.net.URI
 import java.net.URL
 import java.net.URLEncoder
 import java.security.cert.X509Certificate
@@ -21,7 +22,7 @@ import javax.net.ssl.X509TrustManager
 /**
  * 米兔阅读
  */
-object YouTuYueDu : TingShu() {
+object YouTuYueDu : TingShu(), AudioUrlExtraHeaders {
     private val headers = mapOf(
         "devicetype" to "3",
         "channelname" to "official",
@@ -192,5 +193,13 @@ object YouTuYueDu : TingShu() {
         }
 
         return Pair(list, pageCount)
+    }
+
+    override fun headers(audioUrl: String): Map<String, String> {
+        val hashMap = hashMapOf<String, String>()
+        if (audioUrl.contains("jiuhew.com") || audioUrl.contains("dayouzh.com")) {
+            hashMap["Host"] = URI(audioUrl).host
+        }
+        return hashMap
     }
 }
