@@ -11,7 +11,8 @@
 
 ## 自定义源
 
-请参考 `CustomSources` 项目，这是一个纯 java/kotlin 项目，用 IDEA 打开即可，不需要 Android Studio 以及安卓环境。app 里面已经集成了网络请求库`Fuel` 以及HTML解析器 `Jsoup`， 此自定义源项目最好直接使用这两个库，不要引入额外的第三方库。
+请参考 `CustomSources` 项目，这是一个纯 java/kotlin 项目，用 IDEA 打开即可，不需要 Android Studio 以及安卓环境。零基础的同学请务必搭建好 java 开发环境，比如安装 jdk 已经添加环境变量。
+app 里面已经集成了网络请求库`Fuel` 以及HTML解析器 `Jsoup`， 此自定义源项目最好直接使用这两个库，不要引入额外的第三方库。
 
 ### 第一步：重构目录名
 
