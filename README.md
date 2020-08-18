@@ -30,7 +30,7 @@
 
 ### 第四步：打包 jar 文件
 
-打开命令行，在项目根目录输入: `./gradlew jar` 或者 win `gradlew.bat jar` 。输出路径为：项目目录/build/libs/CustomSources-1.0-SNAPSHOT.jar
+打开命令行，在项目根目录输入: `./gradlew jar` 或者 windows 平台使用这个命令：`gradlew.bat jar` 。输出路径为：项目目录/build/libs/CustomSources-1.0-SNAPSHOT.jar
 
 ### 第五步：转 dex
 
