@@ -97,7 +97,7 @@ class YouTuYueDuTest {
             val title = item.getString("name")
             val author = ""
             val artist = item.getString("actorName")
-            val status = "共 ${item.getInt("chapterCnt")}章"
+            val status = "共 ${item.getInt("chapterCnt")} 章"
             val intro = item.getString("intro")
             list.add(
                 Book(coverUrl,

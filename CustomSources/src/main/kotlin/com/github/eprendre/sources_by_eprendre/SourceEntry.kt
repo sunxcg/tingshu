@@ -19,7 +19,8 @@ object SourceEntry {
     fun getSources(): List<TingShu> {
         return listOf(
             JDLG,
-            YouTuYueDu
+            YouTuYueDu,
+            YunTuYouSheng
         )
     }
 }
