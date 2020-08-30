@@ -18,6 +18,7 @@ object SourceEntry {
     @JvmStatic
     fun getSources(): List<TingShu> {
         return listOf(
+            HuanTingWang,
             JDLG,
             YouTuYueDu,
             YunTuYouSheng
