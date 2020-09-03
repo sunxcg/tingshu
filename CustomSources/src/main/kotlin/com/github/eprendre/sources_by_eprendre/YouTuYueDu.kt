@@ -95,6 +95,10 @@ object YouTuYueDu : TingShu(), AudioUrlExtraHeaders {
         return AudioUrlDirectExtractor
     }
 
+    override fun isWebViewNotRequired(): Boolean {
+        return true
+    }
+
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = ArrayList<Episode>()
         if (loadEpisodes) {

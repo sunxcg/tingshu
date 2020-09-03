@@ -36,6 +36,10 @@ object YunTuYouSheng : TingShu() {
         return true
     }
 
+    override fun isWebViewNotRequired(): Boolean {
+        return true
+    }
+
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
         val encodedKeywords = URLEncoder.encode(keywords, "utf-8") //编码
         val url =
@@ -180,7 +184,7 @@ object YunTuYouSheng : TingShu() {
     }
 
     override fun getCategoryList(url: String): Category {
-        var categoryUrl = if (url.contains("http")) {
+        val categoryUrl = if (url.contains("http")) {
             url
         } else {
             "http://open-service.yuntuys.com/api/w_ys/book/getBookListByType/wechat:$wechatID/$url?pageNum=1&pageSize=20"
