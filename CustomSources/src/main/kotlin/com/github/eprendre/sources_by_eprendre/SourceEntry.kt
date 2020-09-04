@@ -22,7 +22,8 @@ object SourceEntry {
             JDLG,
             YouTuYueDu,
             YunTuYouSheng,
-            WoTingPingShu
+            WoTingPingShu,
+            LiuYueTingShu
         )
     }
 }
