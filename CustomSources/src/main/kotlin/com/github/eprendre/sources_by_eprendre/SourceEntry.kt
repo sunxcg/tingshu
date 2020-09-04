@@ -21,7 +21,8 @@ object SourceEntry {
             HuanTingWang,
             JDLG,
             YouTuYueDu,
-            YunTuYouSheng
+            YunTuYouSheng,
+            WoTingPingShu
         )
     }
 }
