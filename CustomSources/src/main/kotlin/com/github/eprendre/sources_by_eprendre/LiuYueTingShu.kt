@@ -160,7 +160,10 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
 
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
-        if (audioUrl.contains("audio.ting985.com")) {
+        val headersRequired = listOf("audio.ting985.com", "6yueting.com").any {
+            it.contains(it)
+        }
+        if (headersRequired) {
             hashMap["Host"] = URI(audioUrl).host
             hashMap["Referer"] = "http://m.6yueting.com/"
         }
