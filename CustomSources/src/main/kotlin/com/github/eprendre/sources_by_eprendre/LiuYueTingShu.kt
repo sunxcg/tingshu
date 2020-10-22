@@ -27,7 +27,7 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
     }
 
     override fun adUrl(): String {
-        return "http://m.6yueting.com/ad.php"
+        return "http://m.6yueting.com/pllay.php"
     }
 
     override fun showAdByDefault(): Boolean {
