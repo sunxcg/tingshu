@@ -24,6 +24,7 @@ data class Book(
     var isShowBriefChapterTitle: Boolean = false
     var sourceId: String? = null
     var status: String = ""
+    var episodesUpdateTime: Long = 0
 
     override fun equals(other: Any?): Boolean {
         throw RuntimeException("Stub!")
