@@ -19,7 +19,7 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
     }
 
     override fun getName(): String {
-        return "六月听书"
+        return "6月听书"
     }
 
     override fun getDesc(): String {
