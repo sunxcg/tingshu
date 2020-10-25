@@ -160,7 +160,7 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
 
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
-        val headersRequired = listOf("audio.ting985.com", "6yueting.com").any {
+        val headersRequired = listOf("audio.ting985.com", "6yueting.com", "5txs.net").any {
             audioUrl.contains(it)
         }
         if (headersRequired) {
