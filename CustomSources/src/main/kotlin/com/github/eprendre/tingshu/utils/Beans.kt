@@ -25,6 +25,7 @@ data class Book(
     var sourceId: String? = null
     var status: String = ""
     var episodesUpdateTime: Long = 0
+    var isTransientEpisodes: Boolean = false //如果章节列表是动态变化的，把这个参数设置为true。在每次进入播放页时会自动刷新。将在1.8.6后加入
 
     override fun equals(other: Any?): Boolean {
         throw RuntimeException("Stub!")
