@@ -80,7 +80,8 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
-        AudioUrlWebViewExtractor.setUp(isDeskTop = false) { html ->
+        AudioUrlWebViewExtractor.setUp(isDeskTop = false,
+        script = "(function() { return ('<html>'+document.getElementsByName(\"myIframe\")[0].contentDocument.documentElement.innerHTML+'</html>'); })();") { html ->
             val doc = Jsoup.parse(html)
             val audioElement = doc.selectFirst("#audio")
             return@setUp audioElement?.attr("src")
@@ -165,7 +166,6 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
         }
         if (headersRequired) {
             hashMap["Host"] = URI(audioUrl).host
-            hashMap["Referer"] = "http://m.6yueting.com/"
         }
         return hashMap
     }
