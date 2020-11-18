@@ -9,7 +9,7 @@ object SourceEntry {
      */
     @JvmStatic
     fun getDesc(): String {
-        return "app 作者维护的源"
+        return "内置源"
     }
 
     /**

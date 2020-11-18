@@ -29,7 +29,7 @@ object YunTuYouSheng : TingShu() {
     }
 
     override fun getDesc(): String {
-        return "北京市海淀区图书馆"
+        return "推荐指数:5星 ⭐⭐⭐⭐⭐\n有文化的人听这个😭"
     }
 
     override fun isMultipleEpisodePages(): Boolean {

@@ -23,7 +23,7 @@ object HuanTingWang : TingShu() {
     }
 
     override fun getDesc(): String {
-        return "服务器位于: 香港\n速度不错"
+        return "推荐指数:5星 ⭐⭐⭐⭐⭐\n资源稳定"
     }
 
     override fun isWebViewNotRequired(): Boolean {

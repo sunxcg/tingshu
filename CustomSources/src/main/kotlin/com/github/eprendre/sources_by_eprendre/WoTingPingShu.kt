@@ -21,8 +21,16 @@ object WoTingPingShu : TingShu() {
     }
 
     override fun getDesc(): String {
-        return "服务器位于: 香港"
+        return "推荐指数:1星 ⭐\n目前已无法解析"
     }
+
+//    override fun isDiscoverable(): Boolean {
+//        return false
+//    }
+//
+//    override fun isSearchable(): Boolean {
+//        return false
+//    }
 
     override fun isWebViewNotRequired(): Boolean {
         return false

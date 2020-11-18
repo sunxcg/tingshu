@@ -61,7 +61,7 @@ object YouTuYueDu : TingShu(), AudioUrlExtraHeaders {
     }
 
     override fun getDesc(): String {
-        return "加载较慢，请耐心等待。"
+        return "推荐指数:4星 ⭐⭐⭐⭐\n加载很慢，请耐心等待。"
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {

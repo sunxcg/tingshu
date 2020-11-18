@@ -23,7 +23,7 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
     }
 
     override fun getDesc(): String {
-        return "服务器位于: 广州\n有广告，点击广告就是对网站的支持。"
+        return "推荐指数:5星 ⭐⭐⭐⭐⭐\n有广告，点击广告就是对网站的支持。"
     }
 
     override fun adUrl(): String {

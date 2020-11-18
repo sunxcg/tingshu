@@ -23,6 +23,10 @@ object JDLG : TingShu() {
         return "经典老歌"
     }
 
+    override fun getDesc(): String {
+        return "推荐指数:3星 ⭐⭐⭐\n打开较慢"
+    }
+
     /**
      * 不做搜索
      */
