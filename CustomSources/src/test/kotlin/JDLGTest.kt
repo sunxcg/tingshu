@@ -17,7 +17,7 @@ class JDLGTest {
     @Test
     fun categoryList() {
         val type = "0"
-        val url = "http://www.jdlg.net/"
+        val url = "http://www.jdlg.net/jingdianlaoge500shou/"
         val doc = Jsoup.connect(url).testConfig(true).get()
         val divs = doc.select("#tipcontent > div > div")
         println(divs.size)

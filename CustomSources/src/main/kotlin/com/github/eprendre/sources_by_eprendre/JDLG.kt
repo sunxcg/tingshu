@@ -55,7 +55,7 @@ object JDLG : TingShu() {
 
     override fun getCategoryList(url: String): Category {
         val type = url.toInt()
-        val doc = Jsoup.connect("http://www.jdlg.net/").config(true).get()
+        val doc = Jsoup.connect("http://www.jdlg.net/jingdianlaoge500shou/").config(true).get()
         val divs = doc.select("#tipcontent > div > div")
 
         val list = ArrayList<Book>()
