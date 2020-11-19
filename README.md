@@ -8,9 +8,7 @@
 
 添加方法：复制下方网址，打开app左侧菜单源管理，右上角点击添加。
 
-* ASMR(作者：老陈): `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kyloasmr.json`
-* 听书(作者：老陈): `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kylopublic.json`
- 
+* 听书源(作者：老陈): `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kylopublic.json`
 
 ## 下载
 
