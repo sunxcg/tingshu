@@ -2,7 +2,16 @@
 
 一款自用的安卓听书app
 
-视频教程：[https://www.bilibili.com/video/BV1jk4y1B75a](https://www.bilibili.com/video/BV1jk4y1B75a)
+## 视频教程
+
+自定义源：[https://www.bilibili.com/video/BV1jk4y1B75a](https://www.bilibili.com/video/BV1jk4y1B75a)
+订阅制作：[https://www.bilibili.com/video/BV1MV411z7kJ](https://www.bilibili.com/video/BV1MV411z7kJ)
+
+老陈做的教程(更适合新手)：
+
+环境配置:[https://www.bilibili.com/video/BV1WV411a7Dk](https://www.bilibili.com/video/BV1WV411a7Dk)
+编码思路:[https://www.bilibili.com/video/BV1AD4y1X7zU](https://www.bilibili.com/video/BV1AD4y1X7zU)
+编码过程:[https://www.bilibili.com/video/BV1mv411r7S5](https://www.bilibili.com/video/BV1mv411r7S5)
 
 ## 网友制作的订阅源
 
