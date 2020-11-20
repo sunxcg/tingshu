@@ -36,3 +36,29 @@ compileTestKotlin {
 jar {
     exclude('com/github/eprendre/tingshu/**')
 }
+
+task dexTask {
+    doLast {
+        if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+            def folder = new File("${projectDir}/../dx_win")
+            if (!folder.exists()) {
+//                println("请解压 dx_win.zip (不能嵌套)")//中文输出会乱码，干脆新建一个txt文件提示。
+                exec {
+                    workingDir "${buildDir}/libs/"
+                    commandLine 'cmd', '/c', "echo a>请解压dx_win.zip.txt"
+                }
+            } else {
+                def fileName = MY_SOURCES_PACKAGE
+                if (fileName == "sources_by_eprendre") {
+                    fileName = "请重命名"
+                }
+                exec {
+                    workingDir "${buildDir}/libs/"
+                    commandLine 'cmd', '/c', "${projectDir}/../dx_win/dx.bat --dex --output=${fileName}.jar CustomSources-1.0-SNAPSHOT.jar"
+                }
+            }
+        }
+    }
+}
+
+jar.finalizedBy(dexTask)
