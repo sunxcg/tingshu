@@ -15,6 +15,10 @@ public final class SourceEntry {
         INSTANCE = new SourceEntry();
     }
 
+    public static String getDesc() {
+        return "测试源";
+    }
+
     public static List<TingShu> getSources() {
         return CollectionsKt.listOf(M56TingShuJava.INSTANCE);
     }
