@@ -34,7 +34,9 @@ compileTestKotlin {
 }
 
 jar {
-    exclude('com/github/eprendre/tingshu/**')
+    from sourceSets.main.output
+    include "com/github/eprendre/${MY_SOURCES_PACKAGE}/**"
+//    exclude('com/github/eprendre/tingshu/**')
 }
 
 task dexTask {
