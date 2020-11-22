@@ -23,7 +23,8 @@ object SourceEntry {
             YouTuYueDu,
             YunTuYouSheng,
             WoTingPingShu,
-            LiuYueTingShu
+            LiuYueTingShu,
+            KuWo
         )
     }
 }
