@@ -41,10 +41,6 @@ jar {
 
 task dexTask {
     doLast {
-        def fileName = MY_SOURCES_PACKAGE
-        if (fileName == "sources_by_eprendre") {
-            fileName = "请重命名"
-        }
         if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
             def folder = new File("${projectDir}/../dx_win")
             if (!folder.exists()) {
@@ -56,13 +52,13 @@ task dexTask {
             } else {
                 exec {
                     workingDir "${buildDir}/libs/"
-                    commandLine 'cmd', '/c', "${projectDir}/../dx_win/dx.bat --dex --output=${fileName}.jar CustomSources-1.0-SNAPSHOT.jar"
+                    commandLine 'cmd', '/c', "${projectDir}/../dx_win/dx.bat --dex --output=${MY_SOURCES_PACKAGE}.jar CustomSources-1.0-SNAPSHOT.jar"
                 }
             }
         } else {
             exec {
                 workingDir "${buildDir}/libs/"
-                commandLine 'sh', '-c', "dx --dex --output=${fileName}.jar CustomSources-1.0-SNAPSHOT.jar"
+                commandLine 'sh', '-c', "dx --dex --output=${MY_SOURCES_PACKAGE}.jar CustomSources-1.0-SNAPSHOT.jar"
             }
         }
     }
