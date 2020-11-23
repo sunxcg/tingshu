@@ -54,6 +54,14 @@ task dexTask {
                     workingDir "${buildDir}/libs/"
                     commandLine 'cmd', '/c', "${projectDir}/../dx_win/dx.bat --dex --output=${MY_SOURCES_PACKAGE}.jar CustomSources-1.0-SNAPSHOT.jar"
                 }
+                exec {
+                    workingDir "${buildDir}/libs/"
+                    commandLine 'cmd', '/c', "echo adb push ${MY_SOURCES_PACKAGE}.jar /sdcard/Android/data/com.github.eprendre.tingshu/files/jars> upload.bat"
+                }
+                exec {
+                    workingDir "${buildDir}/libs/"
+                    commandLine 'cmd', '/c', "echo pause>> upload.bat"
+                }
             }
         } else {
             exec {
