@@ -4,6 +4,7 @@
 .idea
 .DS_Store
 /captures
+/dx_win/
 
 # Built application files
 *.apk
