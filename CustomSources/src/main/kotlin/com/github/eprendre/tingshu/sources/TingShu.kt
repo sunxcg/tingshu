@@ -88,7 +88,7 @@ abstract class TingShu {
 
     /**
      * 当前源的解析是否没有用到 WebView <br>
-     * 如果返回 false 代表当前源的解析不需要 WebView 的介入，那么这个源会在未集成 WebView 的设备上展示出来(比如手表)。
+     * 如果返回 true 代表当前源的解析不需要 WebView 的介入，那么这个源会在未集成 WebView 的设备上展示出来(比如手表)。
      */
     open fun isWebViewNotRequired() = false
 }
