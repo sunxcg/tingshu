@@ -9,6 +9,7 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.json.responseJson
 import org.json.JSONArray
 import java.net.URLEncoder
+import kotlin.random.Random
 
 /**
  * 云图有声
@@ -30,10 +31,6 @@ object YunTuYouSheng : TingShu() {
 
     override fun getDesc(): String {
         return "推荐指数:5星 ⭐⭐⭐⭐⭐\n有文化的人听这个😭"
-    }
-
-    override fun isMultipleEpisodePages(): Boolean {
-        return true
     }
 
     override fun isWebViewNotRequired(): Boolean {
@@ -232,15 +229,22 @@ object YunTuYouSheng : TingShu() {
         return Category(list, currentPage, totalPage, url, nextUrl)
     }
 
-    private val pageList = ArrayList<Int>()
+    /**
+     * 告知app这个源的章节列表需要分页加载
+     */
+    override fun isMultipleEpisodePages(): Boolean {
+        return true
+    }
+
+    private val pageList = ArrayList<Int>()//保存分页加载的后续任务
 
     override fun reset() {
-        pageList.clear()
+        pageList.clear()//如果用户提前退出加载会调用reset方法，需要在这里及时清空后续任务，打断加载。
     }
 
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = ArrayList<Episode>()
-        if (loadEpisodes) {
+        if (loadEpisodes) {//为true时再进行网络请求，可提升性能
             val bookId = bookUrl
             val url =
                 "http://open-service.yuntuys.com/api/w_ys/book/getChapters/wechat:$wechatID/$bookId/true/asc?pageSize=200&pageNum=1"
@@ -249,22 +253,23 @@ object YunTuYouSheng : TingShu() {
                 .getJSONObject("pageQuery")
             val totalPage = pageQuery.getInt("totalPage")
             val list = pageQuery.getJSONArray("list")
-            episodes.addAll(getEpisodes(list))//暂时加载第一页
-            if (loadFullPages) {//加载所有章节
+            episodes.addAll(getEpisodes(list))//第一次打开播放页时只暂时加载第一页，避免多余的接口请求。
+            if (loadFullPages) {//第二次打开播放页触发加载所有章节，此时才进行耗资源的相关操作。
                 if (totalPage > 1) {
-                    pageList.addAll(2..totalPage)
+                    pageList.addAll(2..totalPage)//保存待加载的页码
                     while (pageList.size > 0) {
-                        val page = pageList.removeAt(0)
-                        notifyLoadingEpisodes("$page / $totalPage")
+                        val page = pageList.removeAt(0)//每次循环按顺序拿一个页码出来
+                        notifyLoadingEpisodes("$page / $totalPage")//通知界面正在加载第几页
                         val nextUrl = "http://open-service.yuntuys.com/api/w_ys/book/getChapters/wechat:$wechatID/$bookId/true/asc?pageSize=200&pageNum=$page"
                         val jsonArray = Fuel.get(nextUrl).responseJson().third.get().obj()
                             .getJSONObject("data")
                             .getJSONObject("pageQuery")
                             .getJSONArray("list")
                         episodes.addAll(getEpisodes(jsonArray))
+                        Thread.sleep(Random.nextLong(100, 500))//随机延迟一段时间
                     }
                 }
-                notifyLoadingEpisodes(null)
+                notifyLoadingEpisodes(null)//通知界面加载完毕
             }
         }
         return BookDetail(episodes)

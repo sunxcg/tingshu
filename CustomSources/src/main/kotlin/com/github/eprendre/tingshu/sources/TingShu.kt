@@ -58,11 +58,13 @@ abstract class TingShu {
 
     /**
      * 两个地方会调用这个方法，一是列表页弹窗，二是播放页获取所有章节。<br>
-     * 因为有些源在列表提供的部分信息丢失，可以从播放详情页返回更加全面的封面、作者、播音等信息。
-     * 如果章节数一个页面即可加载完，可以不用理会 loadEpisodes 为 false 的情况，直接返回章节列表以统计实际章节数。
-     * 但是如果章节需要翻页获取，loadEpisodes 为 true， loadFullPages 为 false 时只加载第一页。
+     * 因为有些源在列表提供的信息有限，比如没有封面，此时在弹窗的时候可从播放详情页得到封面地址并返回给列表。
+     * 当然还可以返回作者、播音、简介、章节数等。
+     * 性能优化：如果列表提供的信息充足，不需要弹窗再补充任何信息，可在 loadEpisodes 为 true 时再请求网络加载章节信息。
+     * 如果章节需要翻页获取:
+     * loadEpisodes 为 true，loadFullPages 为 false 时只加载第一页。
      * loadEpisodes 为 true, loadFullPages 也为 true 时，遍历所有页的章节。
-     * 异步方法，里面的网络请求同步调用即可。
+     * 具体参考 YunTuYouSheng 代码
      */
     abstract fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean = true, loadFullPages: Boolean = true): BookDetail
 
