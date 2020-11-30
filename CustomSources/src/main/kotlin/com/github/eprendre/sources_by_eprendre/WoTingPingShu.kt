@@ -34,7 +34,7 @@ object WoTingPingShu : TingShu() {
 //    }
 
     override fun isWebViewNotRequired(): Boolean {
-        return false
+        return true
     }
 
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
@@ -76,8 +76,8 @@ object WoTingPingShu : TingShu() {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
-        AudioUrlWebViewExtractor.setUp(script = "(function() { return (document.getElementsByTagName('iframe')[2].src); })();") { url ->
-            val iUrl = url.replace("\"", "")
+        AudioUrlJsoupExtractor.setUp { doc ->
+            val iUrl = doc.selectFirst("iframe").attr("src")
             val script = Jsoup.connect(iUrl).headers(mapOf(
                 "accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 "accept-encoding" to "gzip, deflate, br",
@@ -110,7 +110,7 @@ object WoTingPingShu : TingShu() {
                 .replace("+", "")
             return@setUp audioUrl
         }
-        return AudioUrlWebViewExtractor
+        return AudioUrlJsoupExtractor
     }
 
     private fun decode(str: String): String {
