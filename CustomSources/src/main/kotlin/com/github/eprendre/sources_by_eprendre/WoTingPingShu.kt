@@ -1,6 +1,7 @@
 package com.github.eprendre.sources_by_eprendre
 
 import com.github.eprendre.tingshu.extensions.config
+import com.github.eprendre.tingshu.extensions.getMobileUA
 import com.github.eprendre.tingshu.sources.*
 import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
@@ -75,10 +76,49 @@ object WoTingPingShu : TingShu() {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
-        AudioUrlWebViewSniffExtractor.setUp { url ->
-            url.contains(".mp3", true) || url.contains(".m4a", true)
+        AudioUrlWebViewExtractor.setUp(script = "(function() { return (document.getElementsByTagName('iframe')[2].src); })();") { url ->
+            val iUrl = url.replace("\"", "")
+            val script = Jsoup.connect(iUrl).headers(mapOf(
+                "accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-encoding" to "gzip, deflate, br",
+                "referer" to "https://m.5tps.com/",
+                "sec-fetch-dest" to "iframe",
+                "sec-fetch-mode" to "navigate",
+                "sec-fetch-site" to "cross-site",
+                "upgrade-insecure-requests" to "1",
+                "user-agent" to getMobileUA()
+            )).get().select("script").first { !it.hasAttr("src") }.toString()
+
+            val regex = Regex("'\\+(.*?)\\+'")
+            val list = regex.findAll(script).map {
+                it.groupValues[1]
+            }.toMutableList()
+            list.remove("x")
+            val map = mutableMapOf<String, String>()
+            for (s in list) {
+                val value = "$s = '(.+)';".toRegex().find(script)!!.groupValues[1]
+                map[s] = value
+            }
+            var audioUrl = Regex("mp3:(.+),").find(script)!!.groupValues[1]
+            map.forEach { (t, u) ->
+                audioUrl = audioUrl.replace(t, u)
+            }
+            val sign = decode(Regex("u = \"(.+)\";").find(script)!!.groupValues[1])
+
+            audioUrl = audioUrl.replace("'+x+'", sign)
+                .replace("'", "")
+                .replace("+", "")
+            return@setUp audioUrl
         }
-        return AudioUrlWebViewSniffExtractor
+        return AudioUrlWebViewExtractor
+    }
+
+    private fun decode(str: String): String {
+        return str.split("*").joinToString(separator = "") {
+            if (it.isNotEmpty()) {
+                it.toInt().toChar().toString()
+            } else it
+        }
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
