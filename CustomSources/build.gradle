@@ -21,6 +21,8 @@ dependencies {
     implementation 'com.github.kittinunf.fuel:fuel:2.1.0'
     implementation 'com.github.kittinunf.fuel:fuel-json:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
     implementation group: 'org.json', name: 'json', version: '20140107'
     implementation 'org.jsoup:jsoup:1.13.1'
     testImplementation 'junit:junit:4.13'

@@ -157,9 +157,9 @@ object KuWo: TingShu() {
     }
 
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
-        val data = Fuel.get(bookUrl).responseJson().third.get().obj().getJSONArray("data")
         val episodes = ArrayList<Episode>()
         if (loadEpisodes) {
+            val data = Fuel.get(bookUrl).responseJson().third.get().obj().getJSONArray("data")
             (0 until data.length()).forEach {
                 val item = data.getJSONObject(it)
                 val name = item.getString("name")
