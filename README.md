@@ -2,6 +2,12 @@
 
 一款自用的安卓听书app
 
+## 网友制作的订阅源
+
+添加方法：复制下方网址，打开app左侧菜单源管理，右上角点击添加。
+
+* 听书源(作者：老陈): `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kylopublic.json`
+
 ## 视频教程
 
 * 自定义源：[https://www.bilibili.com/video/BV1jk4y1B75a](https://www.bilibili.com/video/BV1jk4y1B75a)
@@ -13,11 +19,6 @@
 * 编码思路:[https://www.bilibili.com/video/BV1AD4y1X7zU](https://www.bilibili.com/video/BV1AD4y1X7zU)
 * 编码过程:[https://www.bilibili.com/video/BV1mv411r7S5](https://www.bilibili.com/video/BV1mv411r7S5)
 
-## 网友制作的订阅源
-
-添加方法：复制下方网址，打开app左侧菜单源管理，右上角点击添加。
-
-* 听书源(作者：老陈): `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kylopublic.json`
 
 ## 下载
 
