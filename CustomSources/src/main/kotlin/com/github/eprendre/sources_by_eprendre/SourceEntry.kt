@@ -25,7 +25,8 @@ object SourceEntry {
             WoTingPingShu,
             LiuYueTingShu,
             KuWo,
-            KouDaiWeiKeTang
+            KouDaiWeiKeTang,
+            BoKanYouSheng
         )
     }
 }
