@@ -6,7 +6,8 @@
 
 添加方法：复制下方网址，打开app左侧菜单源管理，右上角点击添加。
 
-* 听书源(作者：老陈): `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kylopublic.json`
+* 作者：老陈: `https://kylo94.coding.net/p/tingshuyuan/d/UpdateJar/git/raw/master/kylopublic.json`
+* 作者：格子: `https://tingshu1.coding.net/p/tingshu_ting22/d/tingshu_ting22/git/raw/master/source.json`
 
 ## 视频教程
 
