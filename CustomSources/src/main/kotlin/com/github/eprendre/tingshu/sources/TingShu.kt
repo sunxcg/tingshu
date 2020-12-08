@@ -125,3 +125,35 @@ interface AudioUrlExtraHeaders {
      */
     fun headers(audioUrl: String): Map<String, String>
 }
+
+/**
+ * 加载封面时是否需要额外的 headers
+ * 在 2.0.1 之后加入
+ */
+interface CoverUrlExtraHeaders {
+    /**
+     * 一定要严格判断 coverUrl
+     * 符合条件才能给 headers 添加合适的值，并且返回 true
+     * 若不符合条件则不要修改 headers 并返回 false
+     * 如果不判断 coverUrl 而直接给 headers 添加一些值将导致其它书源的封面加载出错！
+     */
+    fun coverHeaders(coverUrl: String, headers: MutableMap<String, String>): Boolean
+}
+
+/**
+ * 当源需要登录才可以获取数据时实现此接口
+ * 要求源网站拥有比较长久的 Cookies 过期时间
+ * 目前仅限使用了 WebView 的 AudioUrlWebViewExtractor 和 AudioUrlWebViewSniffExtractor 支持
+ * 在 2.0.1 之后加入
+ */
+interface ILogin {
+    /**
+     * 获取登录网址
+     */
+    fun getLoginUrl(): String
+
+    /**
+     * 登录页是否需要使用 PC 版 UA，默认使用手机版
+     */
+    fun isLoginDesktop(): Boolean = false
+}

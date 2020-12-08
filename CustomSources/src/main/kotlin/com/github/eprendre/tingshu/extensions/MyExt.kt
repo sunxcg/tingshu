@@ -38,6 +38,21 @@ fun getMobileUA(): String {
 }
 
 /**
+ * WebView 登录之后，可以用此方法得到 Cookie
+ */
+fun getCookie(url: String): String? {
+    throw RuntimeException("Stub!")
+}
+
+/**
+ * 提示消息
+ */
+fun showToast(msg: String) {
+    throw RuntimeException("Stub!")
+}
+
+
+/**
  * 加载多页章节列表时用到这个
  * 调用之后相关界面上会显示：正在加载章节列表: $pageInfo
  * 如果 pageInfo 传空，代表加载完毕
