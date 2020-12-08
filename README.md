@@ -51,7 +51,7 @@ app 里面已经集成了网络请求库`Fuel` 以及HTML解析器 `Jsoup`， �
 1. 在`gradle.properties`里面修改`MY_SOURCES_PACKAGE=sources_by_xxx`
 1. 解压dx_win.zip，原地解压即可，不要改路径。(使用 mac 或者 linux 的同学无需解压，请自行安装安卓SDK并添加dx到环境变量)
 1. 打开命令行，在项目根目录输入: `./gradlew jar` 或 windows 平台：`gradlew.bat jar`。不喜欢命令行的同学可以直接在IDEA右方找到Gradle->CustomSources->build->jar 双击。
-1. 此时在项目目录/build/libs/ 里面出现 CustomSources-1.0-SNAPSHOT.jar。如果dx_win被正确解压，则自动生成 `sources_by_xxx.jar`
+1. 此时在项目目录/build/libs/ 里面出现 CustomSources-1.0-SNAPSHOT.jar。如果dx_win被正确解压，则自动生成 `sources_by_xxx.jar`, windows 系统还会生成一个 upload.bat 文件。
 
 ![jar](art/jar.png)
 
@@ -59,9 +59,11 @@ app 里面已经集成了网络请求库`Fuel` 以及HTML解析器 `Jsoup`， �
 
 有两种添加方式
 
+1. 自动添加：运行 upload.bat 即可。（需要先配置好adb的环境变量，如果没有adb的同学可以去解压项目里的adb.zip，放到合适的地方并添加环境变量)
+
 1. 手动添加：把 jar 包移至手机 app 目录下: `/sdcard/Android/data/com.github.eprendre.tingshu/files/jars/`， app 会在启动时自动加载。
 
-2. 订阅添加。写一个接口，然后在 app 的自定义源管理右上角添加。 接口参考：[https://eprendre2.coding.net/p/tingshu/d/tingshu/git/raw/master/TingShuSources/external_sources.json](https://eprendre2.coding.net/p/tingshu/d/tingshu/git/raw/master/TingShuSources/external_sources.json)。订阅方式的好处是源作者可以更轻松的维护源，只要在接口里修改版本号，app 每次启动时会自动检测更新。
+1. 订阅添加。写一个接口，然后在 app 的自定义源管理右上角添加。 接口参考：[https://eprendre2.coding.net/p/tingshu/d/tingshu/git/raw/master/TingShuSources/external_sources.json](https://eprendre2.coding.net/p/tingshu/d/tingshu/git/raw/master/TingShuSources/external_sources.json)。订阅方式的好处是源作者可以更轻松的维护源，只要在接口里修改版本号，app 每次启动时会自动检测更新。
 
 举例：
 
