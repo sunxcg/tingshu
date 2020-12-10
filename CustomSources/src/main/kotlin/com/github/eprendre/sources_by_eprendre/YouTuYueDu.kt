@@ -202,7 +202,7 @@ object YouTuYueDu : TingShu(), AudioUrlExtraHeaders {
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
         if (audioUrl.contains("jiuhew.com") || audioUrl.contains("dayouzh.com")) {
-            hashMap["Host"] = URI(audioUrl).host
+            hashMap["Host"] = URL(audioUrl).host
         }
         return hashMap
     }

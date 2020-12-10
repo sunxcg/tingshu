@@ -6,7 +6,7 @@ import com.github.eprendre.tingshu.utils.*
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.json.responseJson
 import org.jsoup.Jsoup
-import java.net.URI
+import java.net.URL
 import java.net.URLEncoder
 
 object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
@@ -165,7 +165,7 @@ object LiuYueTingShu : TingShu(), IAd, AudioUrlExtraHeaders {
             audioUrl.contains(it)
         }
         if (headersRequired) {
-            hashMap["Host"] = URI(audioUrl).host
+            hashMap["Host"] = URL(audioUrl).host
         }
         return hashMap
     }
