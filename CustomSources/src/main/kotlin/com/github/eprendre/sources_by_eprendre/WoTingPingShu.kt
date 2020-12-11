@@ -87,7 +87,7 @@ object WoTingPingShu : TingShu() {
                 "sec-fetch-site" to "cross-site",
                 "upgrade-insecure-requests" to "1",
                 "user-agent" to getMobileUA()
-            )).get().select("script").first { !it.hasAttr("src") }.toString()
+            )).get().select("script").first { !it.hasAttr("src") && !it.hasAttr("language") }.toString()
 
             val regex = Regex("'\\+(.*?)\\+'")
             val list = regex.findAll(script).map {
