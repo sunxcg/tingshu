@@ -27,7 +27,8 @@ object SourceEntry {
             KuWo,
             KouDaiWeiKeTang,
             BoKanYouSheng,
-            ZhongBanYouSheng
+            ZhongBanYouSheng,
+            CCTV
         )
     }
 }
