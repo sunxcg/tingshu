@@ -71,18 +71,18 @@ object CCTV : TingShu(){
         val currentPage = 1
         val totalPage = 1
         val list = ArrayList<Book>()
-        liveList.forEach {
-            list.add(Book("", it.second, it.first, "", "").apply {
-                this.sourceId = getSourceId()
-            })
-        }
+        list.add(Book("", "cctv", "央视直播", "", "").apply {
+            this.sourceId = getSourceId()
+        })
         return Category(list, currentPage, totalPage, url, "")
     }
 
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = mutableListOf<Episode>()
         if (loadEpisodes) {
-            episodes.add(Episode("直播", bookUrl))
+            liveList.forEach {
+                episodes.add(Episode(it.first, it.second))
+            }
         }
         return BookDetail(episodes)
     }
