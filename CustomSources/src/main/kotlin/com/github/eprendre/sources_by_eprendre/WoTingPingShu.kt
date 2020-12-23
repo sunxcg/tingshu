@@ -7,8 +7,44 @@ import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
 import java.lang.Exception
 import java.net.URLEncoder
+import java.security.KeyManagementException
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 object WoTingPingShu : TingShu() {
+    private fun socketFactory(): SSLSocketFactory {
+        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+            @Throws(CertificateException::class)
+            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+            }
+
+            @Throws(CertificateException::class)
+            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+            }
+
+            override fun getAcceptedIssuers(): Array<X509Certificate> {
+                return arrayOf()
+            }
+        })
+
+        try {
+            val sslContext = SSLContext.getInstance("TLS")
+            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+            return sslContext.socketFactory
+        } catch (e: Exception) {
+            when (e) {
+                is RuntimeException, is KeyManagementException -> {
+                    throw RuntimeException("Failed to create a SSL socket factory", e)
+                }
+                else -> throw e
+            }
+        }
+    }
+
     override fun getSourceId(): String {
         return "70865122f88048abaf77582242dcccce"
     }
@@ -40,7 +76,7 @@ object WoTingPingShu : TingShu() {
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
         val encodedKeywords = URLEncoder.encode(keywords, "gb2312")
         val url = "https://m.5tps.me/so.asp?keyword=$encodedKeywords&page=$page"
-        val doc = Jsoup.connect(url).config().get()
+        val doc = Jsoup.connect(url).sslSocketFactory(socketFactory()).config().get()
 
         var totalPage = 1
         val list = ArrayList<Book>()
@@ -67,7 +103,7 @@ object WoTingPingShu : TingShu() {
     }
 
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
-        val doc = Jsoup.connect(bookUrl).config().get()
+        val doc = Jsoup.connect(bookUrl).sslSocketFactory(socketFactory()).config().get()
         val episodes = doc.select("#playlist > ul > li > a").map {
             Episode(it.text(), it.attr("abs:href"))
         }
@@ -78,7 +114,7 @@ object WoTingPingShu : TingShu() {
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
         AudioUrlJsoupExtractor.setUp { doc ->
             val iUrl = doc.selectFirst("iframe").attr("src")
-            val script = Jsoup.connect(iUrl).headers(mapOf(
+            val script = Jsoup.connect(iUrl).sslSocketFactory(socketFactory()).headers(mapOf(
                 "accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 "accept-encoding" to "gzip, deflate, br",
                 "referer" to "https://m.5tps.com/",
@@ -176,7 +212,7 @@ object WoTingPingShu : TingShu() {
     }
 
     override fun getCategoryList(url: String): Category {
-        val doc = Jsoup.connect(url).config().get()
+        val doc = Jsoup.connect(url).sslSocketFactory(socketFactory()).config().get()
         val nextUrl = doc.select(".page > a").firstOrNull { it.text().contains("下页") }?.attr("abs:href") ?: ""
         val (currentPage, totalPage) = doc.selectFirst(".booksite > .bookbutton > a").text().let {
             val pages = it.split(" ")[1].split("/")
