@@ -28,6 +28,26 @@ object CCTV : TingShu(){
         "CCTV-4 中文国际（美）" to "https://cctvtxyh5c.liveplay.myqcloud.com/live/cdrmcctvamerica_1/index.m3u8"
     )
 
+    private val list2 = listOf(
+        "CCTV1" to "http://39.134.66.66/PLTV/88888888/224/3221225601/index.m3u8",
+        "CCTV2" to "http://39.134.66.66/PLTV/88888888/224/3221225691/index.m3u8",
+        "CCTV3" to "http://39.134.66.66/PLTV/88888888/224/3221225490/index.m3u8",
+        "CCTV4" to "http://39.134.66.66/PLTV/88888888/224/3221225487/index.m3u8",
+        "CCTV5" to "http://39.134.66.66/PLTV/88888888/224/3221225606/index.m3u8",
+        "CCTV5+" to "http://39.134.66.66/PLTV/88888888/224/3221225590/index.m3u8",
+        "CCTV6" to "http://39.134.66.66/PLTV/88888888/224/3221225488/index.m3u8",
+        "CCTV7" to "http://39.134.66.66/PLTV/88888888/224/3221225671/index.m3u8",
+        "CCTV8" to "http://39.134.66.66/PLTV/88888888/224/3221225485/index.m3u8",
+        "CCTV9" to "http://39.134.66.66/PLTV/88888888/224/3221225676/index.m3u8",
+        "CCTV10" to "http://39.134.66.66/PLTV/88888888/224/3221225677/index.m3u8",
+        "CCTV11" to "http://39.134.66.66/PLTV/88888888/224/3221225517/index.m3u8",
+        "CCTV12" to "http://39.134.66.66/PLTV/88888888/224/3221225669/index.m3u8",
+        "CCTV13" to "http://39.134.66.66/PLTV/88888888/224/3221225515/index.m3u8",
+        "CCTV14" to "http://39.134.66.66/PLTV/88888888/224/3221225674/index.m3u8",
+        "CCTV15" to "http://39.134.66.66/PLTV/88888888/224/3221225513/index.m3u8",
+        "CCTV17" to "http://39.134.66.66/PLTV/88888888/224/3221225708/index.m3u8"
+    )
+
     override fun getSourceId(): String {
         return "150173b652964f71806264c07245587d"
     }
@@ -41,7 +61,7 @@ object CCTV : TingShu(){
     }
 
     override fun getDesc(): String {
-        return "推荐指数:2星 ⭐⭐\n央视直播，但是只有声音，适合用来听新闻联播。由于是直播，请不要开加速播放。"
+        return "推荐指数:2星 ⭐⭐\n直播，请不要开加速播放。"
     }
 
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
@@ -74,14 +94,23 @@ object CCTV : TingShu(){
         list.add(Book("", "cctv", "央视直播", "", "").apply {
             this.sourceId = getSourceId()
         })
+        list.add(Book("", "cctv2", "央视(带视频)", "", "").apply {
+            this.sourceId = getSourceId()
+        })
         return Category(list, currentPage, totalPage, url, "")
     }
 
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = mutableListOf<Episode>()
         if (loadEpisodes) {
-            liveList.forEach {
-                episodes.add(Episode(it.first, it.second))
+            if (bookUrl == "cctv") {
+                liveList.forEach {
+                    episodes.add(Episode(it.first, it.second))
+                }
+            } else if (bookUrl == "cctv2") {
+                list2.forEach {
+                    episodes.add(Episode(it.first, it.second))
+                }
             }
         }
         return BookDetail(episodes)
