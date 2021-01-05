@@ -9,7 +9,7 @@ object SourceEntry {
      */
     @JvmStatic
     fun getDesc(): String {
-        return "内置源"
+        return "听书源"
     }
 
     /**
