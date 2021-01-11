@@ -136,6 +136,17 @@ interface CoverUrlExtraHeaders {
      * 符合条件才能给 headers 添加合适的值，并且返回 true
      * 若不符合条件则不要修改 headers 并返回 false
      * 如果不判断 coverUrl 而直接给 headers 添加一些值将导致其它书源的封面加载出错！
+     * 举例:
+     * ```
+     * override fun coverHeaders(coverUrl: String, headers: MutableMap<String, String>): Boolean {
+     *     if(coverUrl.contains("xxx.com")) {
+     *         headers["Host"] = URL(coverUrl).host
+     *         headers["User-Agent"] = getDesktopUA()
+     *         return true
+     *     }
+     *     return false
+     * }
+     * ```
      */
     fun coverHeaders(coverUrl: String, headers: MutableMap<String, String>): Boolean
 }
