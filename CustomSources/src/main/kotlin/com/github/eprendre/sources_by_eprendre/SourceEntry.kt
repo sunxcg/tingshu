@@ -28,7 +28,8 @@ object SourceEntry {
             KouDaiWeiKeTang,
             BoKanYouSheng,
             ZhongBanYouSheng,
-            CCTV
+            CCTV,
+            YouShengXiaoShuoBa
         )
     }
 }
