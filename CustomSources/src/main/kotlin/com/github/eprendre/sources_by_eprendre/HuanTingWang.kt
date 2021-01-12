@@ -1,15 +1,17 @@
 package com.github.eprendre.sources_by_eprendre
 
 import com.github.eprendre.tingshu.extensions.config
+import com.github.eprendre.tingshu.sources.AudioUrlExtraHeaders
 import com.github.eprendre.tingshu.sources.AudioUrlExtractor
 import com.github.eprendre.tingshu.sources.AudioUrlJsoupExtractor
 import com.github.eprendre.tingshu.sources.TingShu
 import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
+import java.net.URL
 import java.net.URLDecoder
 import java.net.URLEncoder
 
-object HuanTingWang : TingShu() {
+object HuanTingWang : TingShu(), AudioUrlExtraHeaders {
     override fun getSourceId(): String {
         return "63bbe587eae94cedb15e80d2c8689805"
     }
@@ -152,5 +154,13 @@ object HuanTingWang : TingShu() {
             })
         }
         return Category(list, currentPage, totalPage, url, nextUrl)
+    }
+
+    override fun headers(audioUrl: String): Map<String, String> {
+        val hashMap = hashMapOf<String, String>()
+        if (audioUrl.contains("ting89.com")) {//判断一下，因为一个网站可能会爬取多家资源
+            hashMap["Referer"] = "http://m.ting89.com/"
+        }
+        return hashMap
     }
 }
