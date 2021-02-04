@@ -29,7 +29,8 @@ object SourceEntry {
             BoKanYouSheng,
             ZhongBanYouSheng,
             CCTV,
-            YouShengXiaoShuoBa
+            YouShengXiaoShuoBa,
+            ShengBoFM
         )
     }
 }
