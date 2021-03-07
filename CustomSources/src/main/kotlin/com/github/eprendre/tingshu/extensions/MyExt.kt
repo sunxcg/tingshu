@@ -1,5 +1,6 @@
 package com.github.eprendre.tingshu.extensions
 
+import com.github.eprendre.tingshu.utils.Book
 import org.jsoup.Connection
 import java.net.URL
 import java.net.URLDecoder
@@ -48,6 +49,14 @@ fun getCookie(url: String): String? {
  * 提示消息
  */
 fun showToast(msg: String) {
+    throw RuntimeException("Stub!")
+}
+
+/**
+ * 获取当前正在播放的书籍
+ * 2.1.1 开始加入
+ */
+fun getCurrentBook(): Book {
     throw RuntimeException("Stub!")
 }
 

@@ -122,7 +122,7 @@ object YouTuYueDu : TingShu(), AudioUrlExtraHeaders {
                         musicPathObject.getJSONObject("l").getString("addr")
                     }
                 }
-                val url = "https://ys.f5gtv.com/klajdfiaoj/music_collect${musicPath}"
+                val url = "https://ys.721719.com/klajdfiaoj/music_collect${musicPath}"
                 episodes.add(Episode(name, url))
             }
         }

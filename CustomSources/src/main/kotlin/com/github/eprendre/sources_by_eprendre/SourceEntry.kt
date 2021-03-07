@@ -31,7 +31,8 @@ object SourceEntry {
                 CCTV,
                 YouShengXiaoShuoBa,
                 ShengBoFM,
-                IFish
+                IFish,
+                TingChina
         )
     }
 }
