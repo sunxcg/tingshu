@@ -18,21 +18,22 @@ object SourceEntry {
     @JvmStatic
     fun getSources(): List<TingShu> {
         return listOf(
-                HuanTingWang,
-                JDLG,
-                YouTuYueDu,
-                YunTuYouSheng,
-                WoTingPingShu,
-                LiuYueTingShu,
-                KuWo,
-                KouDaiWeiKeTang,
-                BoKanYouSheng,
-                ZhongBanYouSheng,
-                CCTV,
-                YouShengXiaoShuoBa,
-                ShengBoFM,
-                IFish,
-                TingChina
+            HuanTingWang,
+            JDLG,
+            YouTuYueDu,
+            YunTuYouSheng,
+            WoTingPingShu,
+            LiuYueTingShu,
+            KuWo,
+            KouDaiWeiKeTang,
+            BoKanYouSheng,
+            ZhongBanYouSheng,
+            CCTV,
+            YouShengXiaoShuoBa,
+            ShengBoFM,
+            IFish,
+            TingChina,
+            BiliBili
         )
     }
 }
