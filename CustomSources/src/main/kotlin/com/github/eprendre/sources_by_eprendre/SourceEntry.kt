@@ -23,7 +23,6 @@ object SourceEntry {
             YouTuYueDu,
             YunTuYouSheng,
             WoTingPingShu,
-            LiuYueTingShu,
             KuWo,
             KouDaiWeiKeTang,
             BoKanYouSheng,
@@ -33,7 +32,16 @@ object SourceEntry {
             ShengBoFM,
             IFish,
             TingChina,
-            BiliBili
+            BiliBili,
+            JingTing,
+            XinMo,
+            TingShu74,
+            TingShuBao,
+            //            MaLaTIngShu
+//                YouYuKu,
+//                HaiDao,
+            SouGou,
+            Mgting
         )
     }
 }
