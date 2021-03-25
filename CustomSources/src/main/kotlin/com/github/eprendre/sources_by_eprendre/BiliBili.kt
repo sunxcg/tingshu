@@ -74,6 +74,7 @@ object BiliBili: TingShu() {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
+        AudioUrlWebViewSniffExtractor.setUp(validateUrl = null)
         return AudioUrlWebViewSniffExtractor
     }
 
