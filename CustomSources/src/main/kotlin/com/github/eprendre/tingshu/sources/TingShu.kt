@@ -96,7 +96,7 @@ abstract class TingShu {
 }
 
 interface AudioUrlExtractor {
-    fun extract(url: String, autoPlay: Boolean, isCache: Boolean)
+    fun extract(url: String, autoPlay: Boolean, isCache: Boolean, isDebug: Boolean = false)
 }
 
 /**

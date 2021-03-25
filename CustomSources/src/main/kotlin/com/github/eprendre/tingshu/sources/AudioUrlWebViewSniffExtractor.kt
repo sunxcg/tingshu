@@ -14,7 +14,7 @@ object AudioUrlWebViewSniffExtractor : AudioUrlExtractor {
         throw RuntimeException("Stub!")
     }
 
-    override fun extract(url: String, autoPlay: Boolean, isCache: Boolean) {
+    override fun extract(url: String, autoPlay: Boolean, isCache: Boolean, isDebug: Boolean) {
         throw RuntimeException("Stub!")
     }
 
