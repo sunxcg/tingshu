@@ -1,6 +1,7 @@
 package com.github.eprendre.tingshu.extensions
 
 import com.github.eprendre.tingshu.utils.Book
+import io.reactivex.disposables.Disposable
 import org.jsoup.Connection
 import java.net.URL
 import java.net.URLDecoder
@@ -67,5 +68,22 @@ fun getCurrentBook(): Book {
  * 如果 pageInfo 传空，代表加载完毕
  */
 fun notifyLoadingEpisodes(pageInfo: String?) {
+    throw RuntimeException("Stub!")
+}
+
+/**
+ * 适用于继承 AudioUrlExtractor，若需要嵌套调用多个 AudioUrlXXXExtractor 时务必调用此方法
+ * backgroundTask: 网络请求或者耗时代码需要在后台线程处理, 返回一个 String
+ * mainThreadCallback: 处理前者返回的String，并根据情况选择具体的 AudioUrlXXXExtractor (因为部分AudioUrlXXXExtractor需要在主线程执行）
+ * 2.1.3 开始加入
+ */
+fun extractorAsyncExecute(
+    url: String,
+    autoPlay: Boolean,
+    isCache: Boolean,
+    isDebug: Boolean,
+    backgroundTask: () -> String,
+    mainThreadCallback: (String) -> Unit
+): Disposable {
     throw RuntimeException("Stub!")
 }
