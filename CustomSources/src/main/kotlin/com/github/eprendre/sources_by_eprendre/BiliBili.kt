@@ -89,16 +89,15 @@ object BiliBili: TingShu() {
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = ArrayList<Episode>()
         if (loadEpisodes) {
-            val doc = Jsoup.connect(bookUrl).config().get()
-            val elements = doc.select(".m-video-part-new > ul > li")
-            if (elements.isEmpty()) {
-                episodes.add(Episode("1p", bookUrl))
-            } else {
-                elements.forEachIndexed { index, element ->
-                    val title = element.text()
-                    val page = index + 1
-                    episodes.add(Episode(title, "$bookUrl?p=$page"))
-                }
+            val bvid = bookUrl.split("/").last().replace("BV1", "")
+            val url = "https://api.bilibili.com/x/web-interface/view/detail?aid=&bvid=$bvid"
+            val data = Fuel.get(url).header(headers).responseJson().third.get().obj().getJSONObject("data")
+            val pages = data.getJSONObject("View").getJSONArray("pages")
+            (0 until pages.length()).forEach {
+                val item = pages.getJSONObject(it)
+                val page = item.getInt("page")
+                val title = item.getString("part")
+                episodes.add(Episode(title, "$bookUrl?p=$page"))
             }
         }
         return BookDetail(episodes)

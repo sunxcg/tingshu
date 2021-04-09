@@ -9,7 +9,7 @@ object SourceEntry {
      */
     @JvmStatic
     fun getDesc(): String {
-        return "内置源"
+        return "听书源"
     }
 
     /**
@@ -19,7 +19,7 @@ object SourceEntry {
     fun getSources(): List<TingShu> {
         return listOf(
             HuanTingWang,
-            JDLG,
+//            JDLG,//已失效
             YouTuYueDu,
             YunTuYouSheng,
             WoTingPingShu,

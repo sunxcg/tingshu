@@ -15,7 +15,7 @@ import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-object WoTingPingShu : TingShu() {
+object WoTingPingShu : TingShu(), IAd {
     private fun socketFactory(): SSLSocketFactory {
         val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
             @Throws(CertificateException::class)
@@ -45,6 +45,14 @@ object WoTingPingShu : TingShu() {
         }
     }
 
+    override fun adUrl(): String {
+        return ""
+    }
+
+    override fun showAdByDefault(): Boolean {
+        return true
+    }
+
     override fun getSourceId(): String {
         return "70865122f88048abaf77582242dcccce"
     }
@@ -58,7 +66,7 @@ object WoTingPingShu : TingShu() {
     }
 
     override fun getDesc(): String {
-        return "推荐指数:1星 ⭐\n目前已无法解析"
+        return "推荐指数:5星 ⭐⭐⭐⭐⭐\n资源不错，已和站长达成一致，展示该网站的广告。"
     }
 
 //    override fun isDiscoverable(): Boolean {
