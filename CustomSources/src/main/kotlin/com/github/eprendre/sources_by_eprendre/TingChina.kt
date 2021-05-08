@@ -1,6 +1,7 @@
 package com.github.eprendre.sources_by_eprendre
 
 import com.github.eprendre.tingshu.extensions.config
+import com.github.eprendre.tingshu.extensions.getCurrentBook
 import com.github.eprendre.tingshu.sources.*
 import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
@@ -184,7 +185,7 @@ object TingChina : TingShu(), AudioUrlExtraHeaders {
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
         if (audioUrl.contains("tingchina.com")) {
-            hashMap["Referer"] = "https://www.tingchina.com/"
+            hashMap["Referer"] = getCurrentBook().currentEpisodeUrl ?: "https://www.tingchina.com/"
         }
         return hashMap
     }

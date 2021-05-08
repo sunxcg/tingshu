@@ -1,6 +1,7 @@
 package com.github.eprendre.sources_by_eprendre
 
 import com.github.eprendre.tingshu.extensions.config
+import com.github.eprendre.tingshu.extensions.getCurrentBook
 import com.github.eprendre.tingshu.sources.*
 import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
@@ -21,6 +22,14 @@ object AiTingShu : TingShu(), AudioUrlExtraHeaders, CoverUrlExtraHeaders {
 
     override fun getDesc(): String {
         return "推荐指数:4星 ⭐⭐⭐⭐\n有时候资源不稳定"
+    }
+
+    override fun isDiscoverable(): Boolean {
+        return false
+    }
+
+    override fun isSearchable(): Boolean {
+        return false
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
@@ -98,26 +107,27 @@ object AiTingShu : TingShu(), AudioUrlExtraHeaders, CoverUrlExtraHeaders {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
-//        AudioUrlWebViewExtractor.setUp(true,
-//            "(function() { return ('<html>'+document.getElementsByName(\"play\")[0].contentDocument.documentElement.innerHTML+'</html>'); })();") { str ->
-//            val doc = Jsoup.parse(str)
-//            val audioElement = doc.getElementById("jp_audio_0")
-//            return@setUp audioElement?.attr("src")
-//        }
-        AudioUrlWebViewSniffExtractor.setUp(true) { url ->
-            return@setUp (url.contains(".mp3", true) ||
-                    url.contains(".m4a", true) ||
-                    url.contains(".m4b", true) ||
-                    url.contains(".flac", true) ||
-                    url.contains(".aa3", true) ||
-                    url.contains(".ogg", true) ||
-                    url.contains(".wma", true) ||
-                    url.contains(".wav", true) ||
-                    url.contains(".aac", true) ||
-                    url.contains(".ac3", true) ||
-                    url.contains(".mp4", true))
+        AudioUrlWebViewExtractor.setUp(true,
+            "(function() { return ('<html>'+document.getElementsByName(\"play\")[0].contentDocument.documentElement.innerHTML+'</html>'); })();") { str ->
+            val doc = Jsoup.parse(str)
+            val audioElement = doc.getElementById("jp_audio_0")
+            return@setUp audioElement?.attr("src")
         }
-        return AudioUrlWebViewSniffExtractor
+        return AudioUrlWebViewExtractor
+//        AudioUrlWebViewSniffExtractor.setUp(true) { url ->
+//            return@setUp (url.contains(".mp3", true) ||
+//                    url.contains(".m4a", true) ||
+//                    url.contains(".m4b", true) ||
+//                    url.contains(".flac", true) ||
+//                    url.contains(".aa3", true) ||
+//                    url.contains(".ogg", true) ||
+//                    url.contains(".wma", true) ||
+//                    url.contains(".wav", true) ||
+//                    url.contains(".aac", true) ||
+//                    url.contains(".ac3", true) ||
+//                    url.contains(".mp4", true))
+//        }
+//        return AudioUrlWebViewSniffExtractor
     }
 
     override fun getCategoryList(url: String): Category {
@@ -158,7 +168,7 @@ object AiTingShu : TingShu(), AudioUrlExtraHeaders, CoverUrlExtraHeaders {
 
     override fun coverHeaders(coverUrl: String, headers: MutableMap<String, String>): Boolean {
         if(coverUrl.contains("2uxs.com") || coverUrl.contains("xinexin.cn")) {
-            headers["Referer"] = "https://www.2uxs.com/"
+            headers["Referer"] = getCurrentBook().currentEpisodeUrl ?: "https://www.2uxs.com/"
             headers["Host"] = URL(coverUrl).host
             return true
         }
