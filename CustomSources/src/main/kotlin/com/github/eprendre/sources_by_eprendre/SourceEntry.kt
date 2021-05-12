@@ -1,6 +1,5 @@
 package com.github.eprendre.sources_by_eprendre
 
-import com.github.eprendre.tingshu.extensions.getCurrentBook
 import com.github.eprendre.tingshu.sources.TingShu
 
 object SourceEntry {
@@ -10,7 +9,6 @@ object SourceEntry {
      */
     @JvmStatic
     fun getDesc(): String {
-        getCurrentBook()
         return "听书源"
     }
 
