@@ -1,5 +1,6 @@
 package com.github.eprendre.sources_by_eprendre
 
+import com.github.eprendre.tingshu.extensions.getCurrentBook
 import com.github.eprendre.tingshu.sources.TingShu
 
 object SourceEntry {
@@ -9,6 +10,7 @@ object SourceEntry {
      */
     @JvmStatic
     fun getDesc(): String {
+        getCurrentBook()
         return "听书源"
     }
 
@@ -18,31 +20,32 @@ object SourceEntry {
     @JvmStatic
     fun getSources(): List<TingShu> {
         return listOf(
-                HuanTingWang,
+            HuanTingWang,
 //            JDLG,//已失效
-                YouTuYueDu,
-                YunTuYouSheng,
-                WoTingPingShu,
-                KuWo,
-                KouDaiWeiKeTang,
-                BoKanYouSheng,
-                ZhongBanYouSheng,
-                CCTV,
-                YouShengXiaoShuoBa,
-                ShengBoFM,
-                IFish,
-                TingChina,
-                BiliBili,
-                JingTing,
-                XinMo,
-                TingShu74,
-                TingShuBao,
-                //            MaLaTIngShu
+            YouTuYueDu,
+            YunTuYouSheng,
+            WoTingPingShu,
+            KuWo,
+            KouDaiWeiKeTang,
+            BoKanYouSheng,
+            ZhongBanYouSheng,
+            CCTV,
+            YouShengXiaoShuoBa,
+            ShengBoFM,
+            IFish,
+            TingChina,
+            BiliBili,
+            JingTing,
+            XinMo,
+            TingShu74,
+            TingShuBao,
+            //            MaLaTIngShu
 //                YouYuKu,
 //                HaiDao,
-                SouGou,
-                Mgting,
-                AiTingShu
+            SouGou,
+            Mgting,
+            AiTingShu,
+            Wap520
         )
     }
 }
