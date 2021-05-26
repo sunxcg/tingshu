@@ -43,7 +43,8 @@ object SourceEntry {
             SouGou,
             Mgting,
             AiTingShu,
-            Wap520
+            Wap520,
+            LianTingWang
         )
     }
 }

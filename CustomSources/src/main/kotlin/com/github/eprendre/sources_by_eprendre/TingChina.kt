@@ -187,7 +187,7 @@ object TingChina : TingShu(), AudioUrlExtraHeaders {
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
         if (audioUrl.contains("tingchina.com")) {
-            hashMap["Referer"] = getCurrentBook().currentEpisodeUrl ?: "https://www.tingchina.com/"
+            hashMap["Referer"] = getCurrentBook()?.currentEpisodeUrl ?: "https://www.tingchina.com/"
         }
         return hashMap
     }

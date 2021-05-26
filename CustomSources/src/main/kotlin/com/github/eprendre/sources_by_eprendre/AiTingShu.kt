@@ -168,7 +168,7 @@ object AiTingShu : TingShu(), AudioUrlExtraHeaders, CoverUrlExtraHeaders {
 
     override fun coverHeaders(coverUrl: String, headers: MutableMap<String, String>): Boolean {
         if(coverUrl.contains("2uxs.com") || coverUrl.contains("xinexin.cn")) {
-            headers["Referer"] = getCurrentBook().currentEpisodeUrl ?: "https://www.2uxs.com/"
+            headers["Referer"] = getCurrentBook()?.currentEpisodeUrl ?: "https://www.2uxs.com/"
             headers["Host"] = URL(coverUrl).host
             return true
         }

@@ -38,7 +38,10 @@ object Wap520 : TingShu() {
 
         val elementList = doc.select(".book-ol > .book-li")
         elementList.forEach { item ->
-            val coverUrl = "http://wap.fushu520.com" + item.selectFirst(".book-cover").attr("data-original")
+            var coverUrl = item.selectFirst(".book-cover").attr("data-original")
+            if (coverUrl.startsWith("/")) {
+                coverUrl = "http://wap.fushu520.com$coverUrl"
+            }
             val bookUrl = item.selectFirst("a").absUrl("href")
             val title = item.selectFirst(".book-title").text().trim()
             val a = item.selectFirst(".book-meta").text().trim().split(" ")
@@ -121,7 +124,10 @@ object Wap520 : TingShu() {
 
         val elementList = doc.select(".book-ol > .book-li")
         elementList.forEach { item ->
-            val coverUrl = "http://wap.fushu520.com" + item.selectFirst(".book-cover").attr("data-original")
+            var coverUrl = item.selectFirst(".book-cover").attr("data-original")
+            if (coverUrl.startsWith("/")) {
+                coverUrl = "http://wap.fushu520.com$coverUrl"
+            }
             val bookUrl = item.selectFirst("a").absUrl("href")
             val title = item.selectFirst(".book-title").text().trim()
             val a = item.selectFirst(".book-meta").text().trim().split(" ")

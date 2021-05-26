@@ -56,8 +56,9 @@ fun showToast(msg: String) {
 /**
  * 获取当前正在播放的书籍
  * 2.1.1 开始加入
+ * 2.1.7 改为 nullable
  */
-fun getCurrentBook(): Book {
+fun getCurrentBook(): Book? {
     throw RuntimeException("Stub!")
 }
 

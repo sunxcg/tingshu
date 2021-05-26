@@ -17,7 +17,7 @@ object JingTing : TingShu() {
     }
 
     override fun getUrl(): String {
-        return "http://m.audio699.com"
+        return "http://m.audio698.com"
     }
 
     override fun getName(): String {
@@ -26,7 +26,7 @@ object JingTing : TingShu() {
 
     override fun getDesc(): String {
         return "推荐指数:4星 ⭐⭐⭐⭐\n" +
-                "资源数量尚可，但是网站比较尿性，别访问的太频繁，会封IP的"
+                "资源数量尚可，但别访问的太频繁，会封IP的"
     }
 
     override fun isWebViewNotRequired(): Boolean {//当源没涉及到webview则返回true，代表在没有webview的设备上也可以正常使用这个源
@@ -35,7 +35,7 @@ object JingTing : TingShu() {
 
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
         val encodedKeywords = URLEncoder.encode(keywords, "utf8") //编码
-        val url = "http://m.audio699.com/search?keyword=$encodedKeywords"
+        val url = "http://m.audio698.com/search?keyword=$encodedKeywords"
         val doc = Jsoup.connect(url).referrer(url).config().get()
         val list = ArrayList<Book>()
         doc.select(".clist > a").forEach {
@@ -78,7 +78,7 @@ object JingTing : TingShu() {
                     .header("Accept-Encoding","gzip,deflate")
                     .header("Accept-Language","zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6")
                     .header("Connection","keep-alive")
-                    .header("Host","m.audio699.com")
+                    .header("Host","m.audio698.com")
                     .header("Referer",ref)
                     .header("Upgrade-Insecure-Requests","1")
                     .cookie("ooo", ooo)
@@ -89,7 +89,7 @@ object JingTing : TingShu() {
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
-        val doc = Jsoup.connect("http://m.audio699.com/").config().get()
+        val doc = Jsoup.connect("http://m.audio698.com/").config().get()
         val list = ArrayList<CategoryMenu>()
         val subMenu = doc.select(".nav > a").map { catefory ->
             CategoryTab(catefory.text(), catefory.absUrl("href"))
@@ -158,6 +158,7 @@ object JingTing : TingShu() {
         }
         return BookDetail(episodes, info)
     }
+
     fun encode(text: String): String {
         try {
             //获取md5加密对象

@@ -19,11 +19,11 @@ object XinMo : TingShu() {
 
     override fun getDesc(): String {
         return "推荐指数:4星 ⭐⭐⭐⭐\n" +
-                "资源数量尚可，但是网站比较尿性，别访问的太频繁，会封IP的"
+                "资源数量尚可，但别访问的太频繁，会封IP的"
     }
 
     override fun getUrl(): String {
-        return "http://m.ixinmo.com/"
+        return "http://m.ixinmoo.com/"
     }
 
     override fun getName(): String {
@@ -35,7 +35,7 @@ object XinMo : TingShu() {
     }
 
     override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
-        val url = "http://m.ixinmo.com/search.html"
+        val url = "http://m.ixinmoo.com/search.html"
         val length = "searchword:${URLEncoder.encode(keywords, "utf8")}".length //编码
         val conn = Jsoup.connect(url).config()
         conn.referrer(url)
@@ -51,8 +51,8 @@ object XinMo : TingShu() {
         conn.header("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6")
         conn.header("Cache-Control", "max-age=0")
         conn.header("Connection", "keep-alive")
-        conn.header("Host", "m.ixinmo.com")
-        conn.header("Origin", "http://m.ixinmo.com")
+        conn.header("Host", "m.ixinmoo.com")
+        conn.header("Origin", "http://m.ixinmoo.com")
         conn.header("Upgrade-Insecure-Requests", "1")
         val doc = conn.post()
         val list = ArrayList<Book>()
@@ -86,7 +86,7 @@ object XinMo : TingShu() {
                 .header("Accept-Encoding", "gzip,deflate")
                 .header("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6")
                 .header("Connection", "keep-alive")
-                .header("Host", "m.ixinmo.com")
+                .header("Host", "m.ixinmoo.com")
                 .header("Referer", ref)
                 .header("Upgrade-Insecure-Requests", "1")
                 .cookie("ooo", ooo)
@@ -97,7 +97,7 @@ object XinMo : TingShu() {
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
-        val url = "http://m.ixinmo.com/"
+        val url = "http://m.ixinmoo.com/"
         val doc = getUrl(url, url)
         val list = ArrayList<CategoryMenu>()
         val subMenu = doc.select(".dh > a").map {
@@ -108,7 +108,7 @@ object XinMo : TingShu() {
     }
 
     override fun getCategoryList(url: String): Category {
-        val doc = getUrl(url, "http://m.ixinmo.com/")
+        val doc = getUrl(url, "http://m.ixinmoo.com/")
         val uiPage = doc.select(".pages.cate-pages.clearfix > ul > li")
         val pageNum = uiPage.select("li")[1].text()
         val nextUrl = uiPage.select("li")[2].selectFirst("a").absUrl("href")
@@ -145,7 +145,7 @@ object XinMo : TingShu() {
     private fun getUrl(url: String, ref: String): org.jsoup.nodes.Document {
         val conn = Jsoup.connect(url).config()
         conn.header("Connection", "keep-alive")
-        conn.header("Host", "m.ixinmo.com")
+        conn.header("Host", "m.ixinmoo.com")
         conn.header("Upgrade-Insecure-Requests", "1")
         conn.referrer(ref)
         conn.cookie("ooo", getCookie())
