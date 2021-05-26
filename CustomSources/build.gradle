@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
 }
 
 group 'com.github.eprendre.customsources'
@@ -7,10 +7,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
     maven {
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        url 'https://maven.aliyun.com/nexus/content/groups/public/'
     }
     maven {
-        url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        url 'https://maven.aliyun.com/nexus/content/repositories/jcenter'
     }
 //    mavenCentral()
 //    jcenter()
@@ -28,6 +28,7 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20140107'
     implementation 'org.jsoup:jsoup:1.13.1'
     testImplementation 'junit:junit:4.13'
+    testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.16'
 }
 
 compileKotlin {
