@@ -44,7 +44,8 @@ object SourceEntry {
             Mgting,
             AiTingShu,
             Wap520,
-            LianTingWang
+            LianTingWang,
+            WoAiTingPingShu
         )
     }
 }

@@ -93,6 +93,11 @@ abstract class TingShu {
      * 如果返回 true 代表当前源的解析不需要 WebView 的介入，那么这个源会在未集成 WebView 的设备上展示出来(比如手表)。
      */
     open fun isWebViewNotRequired() = false
+
+    /**
+     * WebView 使用兼容模式运行
+     */
+    open fun isWebViewCompatible() = false
 }
 
 interface AudioUrlExtractor {
