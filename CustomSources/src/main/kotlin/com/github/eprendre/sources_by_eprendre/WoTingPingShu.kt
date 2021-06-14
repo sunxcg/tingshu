@@ -248,7 +248,7 @@ object WoTingPingShu : TingShu(), IAd, AudioUrlExtraHeaders {
 
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
-        if (audioUrl.contains("tt56w.com")) {//判断一下，因为一个网站可能会爬取多家资源
+        if (audioUrl.contains("tt56w.com") || audioUrl.contains("wenwen120.com")) {//判断一下，因为一个网站可能会爬取多家资源
             hashMap["Referer"] = "https://ai-m-5tps.iiszg.com/flw_url.asp?url=%CD%A8%CB%D7%D0%A1%CB%B5%2F%CE%D2%D5%E6%C3%BB%CF%EB%B3%F6%C3%FB%B0%A1%2F0001%5Fa%2Emp3&jiidx=/play_m/30503%5F48%5F1%5F2%2Ehtml&jiids=/play_m/30503%5F48%5F1%5F0%2Ehtml&id=30503&said=48&title=%CE%D2%D5%E6%C3%BB%CF%EB%B3%F6%C3%FB%B0%A1-0001%5Fa"
         }
         return hashMap
