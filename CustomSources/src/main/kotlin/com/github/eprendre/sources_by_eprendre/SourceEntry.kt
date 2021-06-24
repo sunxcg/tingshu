@@ -17,6 +17,7 @@ object SourceEntry {
      */
     @JvmStatic
     fun getSources(): List<TingShu> {
+        HuanTingWang.method220()
         return listOf(
             HuanTingWang,
 //            JDLG,//已失效
@@ -45,7 +46,9 @@ object SourceEntry {
             AiTingShu,
             Wap520,
             LianTingWang,
-            WoAiTingPingShu
+            WoAiTingPingShu,
+            IShuYinTingShu,
+            I275
         )
     }
 }
