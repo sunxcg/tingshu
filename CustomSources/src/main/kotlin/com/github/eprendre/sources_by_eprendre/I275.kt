@@ -1,10 +1,10 @@
 package com.github.eprendre.sources_by_eprendre
 
 import com.github.eprendre.tingshu.extensions.config
-import com.github.eprendre.tingshu.sources.AudioUrlExtractor
-import com.github.eprendre.tingshu.sources.AudioUrlWebViewExtractor
-import com.github.eprendre.tingshu.sources.TingShu
+import com.github.eprendre.tingshu.sources.*
 import com.github.eprendre.tingshu.utils.*
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.json.responseJson
 import org.jsoup.Jsoup
 import java.net.URLEncoder
 
@@ -51,10 +51,16 @@ object I275 : TingShu() {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
-        AudioUrlWebViewExtractor.setUp(script = "audio.src", parse = { s ->
-            return@setUp s.replace("\"", "")
-        })
-        return AudioUrlWebViewExtractor
+        AudioUrlCustomExtractor.setUp { url ->
+            val ids = url.split("play/")[1].replace(".html", "").split("/")
+            val bookId = ids[0]
+            val chapterId = ids[1]
+            val audioUrl = Fuel.post("http://app.yn21.cn/listen/apiapp/AppGetChapterUrl", listOf("bookId" to bookId, "chapterId" to chapterId))
+                .header(mapOf("Content-Type" to "application/x-www-form-urlencoded;charset=UTF-8"))
+                .responseJson().third.get().obj().getString("src")
+            return@setUp audioUrl
+        }
+        return AudioUrlCustomExtractor
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
