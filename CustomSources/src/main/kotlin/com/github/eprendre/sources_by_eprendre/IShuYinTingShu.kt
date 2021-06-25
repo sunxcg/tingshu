@@ -4,7 +4,6 @@ import com.github.eprendre.tingshu.extensions.config
 import com.github.eprendre.tingshu.sources.*
 import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
-import java.net.URLEncoder
 
 object IShuYinTingShu : TingShu(), IAd {
     override fun getSourceId(): String {
@@ -31,59 +30,47 @@ object IShuYinTingShu : TingShu(), IAd {
         return true
     }
 
-    override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
-        val encodedKeywords = URLEncoder.encode(keywords, "utf-8")
-        val url = "https://m.ishuyin.com/search.php?keywords=$encodedKeywords&category=0&sort=add_time&order=DESC&intro=&detail=0&area=&lang=&page=$page"
-        val doc = Jsoup.connect(url).config().get()
+    override fun isDiscoverable(): Boolean {
+        return false
+    }
 
-        var totalPage = page
-        val href = doc.select(".page > a").first { it.text().contains("最末页") }.attr("href")
-        if (!href.isNullOrEmpty()) {
-            totalPage = href.split("page=")[1].toInt()
-        }
+    override fun search(keywords: String, page: Int): Pair<List<Book>, Int> {
+        val url = "https://m.ishuyin.com/e/search/index.php"
+        val map = mapOf("keyboard" to keywords, "show" to "title,newstext,player,playadmin",
+            "submit" to "搜索")
+        val doc = Jsoup.connect(url).config().data(map).post()
+
+        val totalPage = page
 
         val list = ArrayList<Book>()
-        val elementList = doc.select("#cateList_wap > .bookbox > a").filter { it.children().size > 0 }
+        val elementList = doc.select("#showajaxnews > li > a")
         elementList.forEach { element ->
-            val coverUrl = element.selectFirst(".bookimg > img").absUrl("orgsrc")
+            val coverUrl = element.selectFirst("img").absUrl("src")
             val bookUrl = element.absUrl("href")
-            val bookInfo = element.selectFirst(".bookinfo")
-            val title = bookInfo.selectFirst(".bookname").text()
-            var author = ""
-            var artist = ""
-            bookInfo.selectFirst(".author").text().split("|").let {
-                if (it.size > 1) {
-                    author = it[0].trim()
-                    artist = it[1].trim()
-                } else {
-                    artist = it[0].trim()
-                }
-            }
-            val status = bookInfo.selectFirst(".update").text()
-            val intro = bookInfo.selectFirst(".intro_line").text()
+            val bookInfo = element.selectFirst(".info")
+            val title = bookInfo.selectFirst("h3").text()
+            val author = ""
+            val artist = bookInfo.selectFirst(".box > .author").text()
+            val status = bookInfo.selectFirst(".box > .popu").text()
+            val intro = bookInfo.selectFirst("p").text()
             list.add(Book(coverUrl, bookUrl, title, author, artist).apply {
                 this.intro = intro
                 this.status = status
                 this.sourceId = getSourceId()
             })
         }
-
         return Pair(list, totalPage)
     }
 
     override fun getBookDetailInfo(bookUrl: String, loadEpisodes: Boolean, loadFullPages: Boolean): BookDetail {
         val episodes = ArrayList<Episode>()
         if (loadEpisodes) {
-            val id = Regex("show-(\\d+).html").find(bookUrl)?.groupValues?.get(1)
-            if (id != null) {
-                val url = "https://m.ishuyin.com/album-2-${id}.html"
-                val doc = Jsoup.connect(url).config().get()
+            val doc = Jsoup.connect(bookUrl).config().get()
 
-                val l = doc.select("#playlist > ul > li a").map {
-                    Episode(it.text(), it.absUrl("href"))
-                }
-                episodes.addAll(l)
+            val l = doc.select("#playlist > ul > li a").map {
+                Episode(it.text(), it.absUrl("href"))
             }
+            episodes.addAll(l)
         }
 
         return BookDetail(episodes)
@@ -104,7 +91,7 @@ object IShuYinTingShu : TingShu(), IAd {
                 CategoryTab("玄幻", "https://m.ishuyin.com/list-2.html"),
                 CategoryTab("都市", "https://m.ishuyin.com/list-8.html"),
                 CategoryTab("文学", "https://m.ishuyin.com/list-38.html"),
-                CategoryTab("武侠", "https://m.ishuyin.com/list-7.html"),
+                CategoryTab("武侠", "https://m.ishuyin.com/listinfo-92-0.html"),
                 CategoryTab("言情", "https://m.ishuyin.com/list-1.html"),
                 CategoryTab("穿越", "https://m.ishuyin.com/list-36.html"),
                 CategoryTab("推理", "https://m.ishuyin.com/list-39.html"),
