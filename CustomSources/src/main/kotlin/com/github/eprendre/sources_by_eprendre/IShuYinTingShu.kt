@@ -6,6 +6,8 @@ import com.github.eprendre.tingshu.utils.*
 import org.jsoup.Jsoup
 
 object IShuYinTingShu : TingShu(), IAd {
+    var isFirst = false
+
     override fun getSourceId(): String {
         return "704900fe3c7c43f6860859ac0ae32739"
     }
@@ -77,10 +79,16 @@ object IShuYinTingShu : TingShu(), IAd {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
+        isFirst = true
         AudioUrlWebViewExtractor.setUp { str ->
+            if (isFirst) {
+                Thread.sleep(3000)
+                isFirst = false
+            }
             val doc = Jsoup.parse(str)
             val audioElement = doc.selectFirst("#jp_audio_0")
-            return@setUp audioElement?.attr("src")?.replace("https://mp3.aikeu", "http://mp3.aikeu")
+            val url = audioElement?.attr("src")?: ""
+            return@setUp url.replace("https://mp3.aikeu", "http://mp3.aikeu")
         }
         return AudioUrlWebViewExtractor
     }
