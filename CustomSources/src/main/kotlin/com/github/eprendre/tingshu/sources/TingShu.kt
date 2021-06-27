@@ -100,6 +100,8 @@ abstract class TingShu {
     open fun isWebViewCompatible() = false
 
     open fun method220() = false
+
+    open fun c24e329b36b542f4adde9694d4b28a4r() = false
 }
 
 interface AudioUrlExtractor {
