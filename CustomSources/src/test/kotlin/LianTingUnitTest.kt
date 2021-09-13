@@ -16,7 +16,7 @@ class LianTingUnitTest {
      */
     @Test
     fun search() {
-        val keywords = "绝品天医"
+        val keywords = "来自阴间"
         val encodedKeywords = URLEncoder.encode(keywords, "utf-8")
         val page = 1
         val url = "https://m.ting55.com/search/$encodedKeywords/page/$page"
@@ -24,7 +24,7 @@ class LianTingUnitTest {
 
         val cpage = doc.selectFirst(".cpage")
         var totalPage = 1
-        if (cpage != null) {
+        if (cpage != null && cpage.childrenSize() > 0) {
             totalPage = cpage.selectFirst("span").text().replace("页次 ", "").split("/")[1].toInt()
         }
 

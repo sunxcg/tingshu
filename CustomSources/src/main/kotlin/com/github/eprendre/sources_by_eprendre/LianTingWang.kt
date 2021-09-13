@@ -33,7 +33,7 @@ object LianTingWang : TingShu() {
 
         val cpage = doc.selectFirst(".cpage")
         var totalPage = 1
-        if (cpage != null) {
+        if (cpage != null && cpage.childrenSize() > 0) {
             totalPage = cpage.selectFirst("span").text().replace("页次 ", "").split("/")[1].toInt()
         }
 
