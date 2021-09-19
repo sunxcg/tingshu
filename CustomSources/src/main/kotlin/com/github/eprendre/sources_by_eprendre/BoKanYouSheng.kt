@@ -83,7 +83,6 @@ object BoKanYouSheng : TingShu() {
         return listOf(
             CategoryMenu(
                 "图书", listOf(
-                    CategoryTab("个人提升","book::1308"),
                     CategoryTab("经典必读","book::1314"),
                     CategoryTab("国学经典","book::1320"),
                     CategoryTab("文学文艺","book::1306"),
