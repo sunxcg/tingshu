@@ -49,7 +49,8 @@ object SourceEntry {
             WoAiTingPingShu,
             IShuYinTingShu,
             I275,
-            JiHe
+            JiHe,
+            HaiYangTingShu
         )
     }
 }

@@ -55,20 +55,20 @@ object I275 : TingShu() {
     }
 
     override fun getAudioUrlExtractor(): AudioUrlExtractor {
-//        AudioUrlCustomExtractor.setUp { url ->
-//            val ids = url.split("play/")[1].replace(".html", "").split("/")
-//            val bookId = ids[0]
-//            val chapterId = ids[1]
-//            val audioUrl = Fuel.post("http://app.yn21.cn/listen/apiapp/AppGetChapterUrl", listOf("bookId" to bookId, "chapterId" to chapterId))
-//                .header(mapOf("Content-Type" to "application/x-www-form-urlencoded;charset=UTF-8"))
-//                .responseJson().third.get().obj().getString("src")
-//            return@setUp audioUrl
-//        }
-//        return AudioUrlCustomExtractor
-        AudioUrlWebViewExtractor.setUp(script = "audio.src", parse = { s ->
-            return@setUp s.replace("\"", "")
-        })
-        return AudioUrlWebViewExtractor
+        AudioUrlCustomExtractor.setUp { url ->
+            val ids = url.split("play/")[1].replace(".html", "").split("/")
+            val bookId = ids[0]
+            val chapterId = ids[1]
+            val audioUrl = Fuel.post("http://app.yn21.cn/listen/apiapp/AppGetChapterUrl", listOf("bookId" to bookId, "chapterId" to chapterId))
+                .header(mapOf("Content-Type" to "application/x-www-form-urlencoded;charset=UTF-8"))
+                .responseJson().third.get().obj().getString("src")
+            return@setUp audioUrl
+        }
+        return AudioUrlCustomExtractor
+//        AudioUrlWebViewExtractor.setUp(script = "audio.src", parse = { s ->
+//            return@setUp s.replace("\"", "")
+//        })
+//        return AudioUrlWebViewExtractor
     }
 
     override fun getCategoryMenus(): List<CategoryMenu> {
