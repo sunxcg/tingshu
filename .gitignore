@@ -61,7 +61,4 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
-!tingshu_自定义源测试用.apk
-CustomSources/src/main/kotlin/com/github/eprendre/videos/
-CustomSources/src/test/kotlin/Video*.kt
 CustomSources/src/test/kotlin/My*.kt
