@@ -24,8 +24,16 @@ object HuanTingWang : TingShu(), AudioUrlExtraHeaders {
         return "幻听网"
     }
 
+    override fun isSearchable(): Boolean {
+        return false
+    }
+
+    override fun isDiscoverable(): Boolean {
+        return false
+    }
+
     override fun getDesc(): String {
-        return "推荐指数:5星 ⭐⭐⭐⭐⭐\n资源稳定"
+        return "推荐指数:5星 ⭐⭐⭐⭐⭐\n网站已关闭，此源已无法使用。"
     }
 
     override fun isWebViewNotRequired(): Boolean {
