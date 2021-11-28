@@ -147,7 +147,7 @@ object HaiYangTingShu : TingShu(), AudioUrlExtraHeaders {
 
     override fun headers(audioUrl: String): Map<String, String> {
         val hashMap = hashMapOf<String, String>()
-        if (audioUrl.contains("ysxs8.com")) {
+        if (audioUrl.contains("ysxs8")) {
             hashMap["Referer"] = "http://m.ychy.com/"
         }
         return hashMap
