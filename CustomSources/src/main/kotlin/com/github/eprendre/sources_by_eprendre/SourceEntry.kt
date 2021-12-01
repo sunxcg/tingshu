@@ -50,7 +50,8 @@ object SourceEntry {
             IShuYinTingShu,
             I275,
             JiHe,
-            HaiYangTingShu
+            HaiYangTingShu,
+            M456TingShu
         )
     }
 }
