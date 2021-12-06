@@ -21,7 +21,7 @@
 ## 下载
 
 * [Release](https://github.com/eprendre/tingshu/releases)
-* [蓝奏云](https://pan.lanzous.com/b873905)
+* [蓝奏云](https://pan.lanzoux.com/b873905)
 
 ## 自定义源
 
